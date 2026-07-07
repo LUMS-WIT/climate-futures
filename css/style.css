@@ -69,9 +69,10 @@ code, .mono {
 main { flex: 1; }
 
 .container {
-  max-width: 720px;
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 60px 40px;
+  padding: 60px clamp(24px, 5vw, 64px);
 }
 
 /* ---------- Navigation ---------- */
@@ -85,9 +86,10 @@ main { flex: 1; }
 }
 
 .nav-inner {
-  max-width: 720px;
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(24px, 5vw, 64px);
   display: flex;
   align-items: center;
   justify-content: space-between;
