@@ -182,6 +182,71 @@ main { flex: 1; }
   margin-right: 0.5rem;
 }
 
+/* ---------- Hook (landing page) ---------- */
+
+.hook {
+  border-left: 4px solid var(--accent);
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.hook h2 {
+  margin-top: 0;
+}
+
+.hook h3 {
+  margin-top: 2rem;
+}
+
+.stripes-main {
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.stripes-main img,
+.stripes-comparison img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+}
+
+.stripes-main figcaption,
+.stripes-comparison figcaption {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.stripes-comparison {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.25rem 0;
+  text-align: center;
+}
+
+.event-list {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.event-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.event-list li:last-child { border-bottom: none; }
+
+.learning-list {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+}
+
+.learning-list li { margin-bottom: 0.6rem; }
+
+.hook-closing { font-weight: 600; }
+
 /* ---------- Announcements ---------- */
 
 .announcements {
@@ -389,4 +454,6 @@ tr.module-header td {
   .container { padding: 40px 20px; }
   .nav-inner { flex-direction: column; align-items: flex-start; padding: 0 20px; }
   th, td { padding: 0.5rem 0.6rem; font-size: 0.9rem; }
+  .stripes-comparison { grid-template-columns: 1fr; }
+  .hook { padding-left: 1rem; }
 }
