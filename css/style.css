@@ -1,0 +1,636 @@
+/* ============================================
+   ENGG562/ENV462 — Climate Change Governance
+   Academic Dark Theme
+   ============================================ */
+
+:root {
+  --bg: #1a1f2e;
+  --surface: #242938;
+  --surface-alt: #2c3347;
+  --module-header: #2f3a56;
+  --accent: #4a9eff;
+  --accent-dim: rgba(74, 158, 255, 0.15);
+  --text: #e8eaf0;
+  --text-secondary: #9ba3b8;
+  --border: #333b52;
+  --badge-discussion-bg: rgba(74, 158, 255, 0.18);
+  --badge-discussion-text: #7fbaff;
+  --badge-handson-bg: rgba(66, 199, 141, 0.18);
+  --badge-handson-text: #5fd6a4;
+  --badge-midterm-bg: rgba(255, 152, 66, 0.18);
+  --badge-midterm-text: #ffb066;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+h1 { font-size: 2rem; margin: 0 0 0.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+h2:first-of-type { border-top: none; padding-top: 0; margin-top: 1rem; }
+h3 { font-size: 1.15rem; margin: 1.5rem 0 0.75rem; color: var(--accent); }
+
+p { margin: 0 0 1rem; color: var(--text); }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+code, .mono {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+}
+
+/* ---------- Layout ---------- */
+
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ---------- Navigation ---------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(26, 31, 46, 0.95);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.nav-brand {
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 0;
+}
+
+.nav-brand .code {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.nav-brand .title {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.nav-links a.active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ---------- Hero / Home ---------- */
+
+.hero {
+  padding: 3rem 0 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.hero .semester-tag {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 { font-size: 2.25rem; }
+
+.hero .subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.hero .description {
+  margin-top: 1.25rem;
+  max-width: 70ch;
+  color: var(--text);
+}
+
+/* ---------- Instructor Card ---------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.instructor-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin: 1.5rem 0 2rem;
+}
+
+.instructor-avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.instructor-details h3 {
+  margin: 0 0 0.25rem;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.instructor-details .role {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.instructor-details .meta-row {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.instructor-details .meta-row strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---------- Quick Links Bar ---------- */
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.quick-links a {
+  flex: 1 1 140px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.quick-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* ---------- Announcements ---------- */
+
+.announcements {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+
+.announcements h2 {
+  margin: 0 0 0.5rem;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+.announcements .empty-state {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+/* ---------- Notice / Info banners ---------- */
+
+.notice {
+  background: var(--accent-dim);
+  border: 1px solid rgba(74, 158, 255, 0.3);
+  border-radius: 8px;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.92rem;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Tables (general) ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 2rem;
+  font-size: 0.92rem;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+thead th {
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+tbody tr:hover {
+  background: rgba(74, 158, 255, 0.06);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.table-wrap table {
+  margin: 0;
+}
+
+.table-wrap th, .table-wrap td {
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Schedule Table Specific ---------- */
+
+.schedule-table-wrap {
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.schedule-table-wrap table {
+  min-width: 760px;
+}
+
+.schedule-table-wrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-alt);
+}
+
+tr.module-header th,
+tr.module-header td {
+  background: var(--module-header) !important;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid var(--border);
+}
+
+tr.module-header .module-num {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.week-cell {
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ---------- Badges ---------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  margin: 0.15rem 0.3rem 0.15rem 0;
+}
+
+.badge-discussion {
+  background: var(--badge-discussion-bg);
+  color: var(--badge-discussion-text);
+}
+
+.badge-handson {
+  background: var(--badge-handson-bg);
+  color: var(--badge-handson-text);
+}
+
+.badge-midterm {
+  background: var(--badge-midterm-bg);
+  color: var(--badge-midterm-text);
+}
+
+.topic-cell .topic-title {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- Grading breakdown ---------- */
+
+.grading-table td:last-child,
+.grading-table th:last-child {
+  text-align: right;
+}
+
+.grading-bar-cell {
+  width: 45%;
+}
+
+.grading-bar-track {
+  background: var(--surface-alt);
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.grading-bar-fill {
+  background: var(--accent);
+  height: 100%;
+  border-radius: 4px;
+}
+
+/* ---------- Policy / prereq sections ---------- */
+
+.policy-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.policy-block h3 {
+  margin-top: 0;
+}
+
+.placeholder-text {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ---------- Resource lists ---------- */
+
+.resource-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.resource-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.resource-list .r-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.resource-list .r-meta {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin-top: 0.15rem;
+}
+
+.resource-list.numbered {
+  counter-reset: paper;
+}
+
+.resource-list.numbered li {
+  display: flex;
+  gap: 0.9rem;
+}
+
+.resource-list.numbered li::before {
+  counter-increment: paper;
+  content: counter(paper);
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tool-list .tool-name {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ---------- Project page ---------- */
+
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 2rem;
+  border-left: 2px solid var(--border);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 1.5rem 1.5rem;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -6.5px;
+  top: 4px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline .t-label {
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+}
+
+.timeline .t-desc {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.deliverables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.deliverable-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.deliverable-card .d-title {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.92rem;
+  margin-bottom: 0.35rem;
+}
+
+.deliverable-card .d-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- Status pill (Assignments page) ---------- */
+
+.pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--surface-alt);
+  color: var(--text-secondary);
+}
+
+/* ---------- Utility ---------- */
+
+.text-secondary { color: var(--text-secondary); }
+.mt-0 { margin-top: 0; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .container { padding: 1.5rem 1rem 3rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .nav-inner { flex-direction: column; align-items: flex-start; padding-bottom: 0.25rem; }
+  .nav-links { gap: 0.15rem; padding-top: 0; }
+  .nav-links a { padding: 0.4rem 0.5rem; font-size: 0.85rem; }
+  .instructor-card { flex-direction: column; }
+  th, td { padding: 0.6rem 0.6rem; font-size: 0.85rem; }
+}
