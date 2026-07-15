@@ -23,6 +23,7 @@ Assistant Research Professor, Centre for Water Informatics & Technology (WIT), L
 Research Scholar, Energy, Climate and Environment Program, IIASA
 Email: awais.m@lums.edu.pk
 Office Hours: Wednesdays, 2:00–4:00 PM
+Office: Room No. 9-201A. Maxwell Wing. 2nd Floor. SSE Bldg.
 
 ## Structure
 
