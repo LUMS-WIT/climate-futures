@@ -348,6 +348,8 @@ thead th {
 
 .schedule-table-wrap table {
   min-width: 640px;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .schedule-table-wrap thead th {
@@ -449,9 +451,17 @@ tr.module-header td {
   counter-reset: paper;
 }
 
+.resource-list.numbered li {
+  position: relative;
+  padding-left: 2rem;
+}
+
 .resource-list.numbered li::before {
   counter-increment: paper;
-  content: counter(paper) ". ";
+  content: counter(paper) ".";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
   font-weight: 700;
 }
 
