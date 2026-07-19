@@ -348,15 +348,6 @@ thead th {
 
 .schedule-table-wrap table {
   min-width: 640px;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.schedule-table-wrap thead th {
-  position: sticky;
-  top: 57px;
-  background: var(--bg);
-  z-index: 2;
 }
 
 tbody tr:nth-child(even) {
