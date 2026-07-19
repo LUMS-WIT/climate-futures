@@ -93,7 +93,7 @@ main { flex: 1; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.5rem 1.25rem;
 }
 
@@ -101,13 +101,16 @@ main { flex: 1; }
   font-weight: 700;
   color: var(--text);
   padding: 1rem 0;
+  flex-shrink: 0;
 }
 
 .nav-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1rem;
   padding: 0.75rem 0;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .nav-links a {
@@ -159,13 +162,13 @@ main { flex: 1; }
 
 .instructor-block {
   border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
   padding: 1.25rem 1.5rem;
-  margin: 1.5rem 0 2rem;
+  margin: 2.5rem 0;
 }
 
-.instructor-block .role {
-  color: var(--text-secondary);
-  margin-bottom: 0.75rem;
+.instructor-block h3 {
+  margin: 0 0 0.75rem;
 }
 
 .instructor-block .meta-row { margin-bottom: 0.25rem; }
@@ -296,6 +299,16 @@ main { flex: 1; }
   margin: 0;
 }
 
+.announcements .resource-list {
+  margin: 0;
+}
+
+.announcements-subscribe {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0.75rem 0 0;
+}
+
 /* ---------- Notice ---------- */
 
 .notice {
@@ -367,7 +380,8 @@ tr.module-header td {
   border-left: 4px solid var(--accent);
   border-top: 1px solid var(--border);
   border-bottom: none;
-  padding-bottom: 0.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.75rem;
 }
 
 .module-intro .module-desc {

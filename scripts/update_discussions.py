@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-"""Fetch recent GitHub Discussions for this repo and bake them into discussions.html.
+"""Fetch recent GitHub Discussions for this repo and bake them into the site.
 
 Runs in CI (see .github/workflows/update-discussions.yml) — not in the browser.
-The site remains fully static at request time; this script just keeps the
-static HTML in sync with the live discussion board.
+The site remains fully static at request time; this script just keeps two
+spots in the static HTML in sync with the live discussion board:
+
+  - discussions.html : the 10 most recently updated discussions, any category.
+  - index.html        : the 5 most recent posts in the "Announcements" category,
+                         if that category exists. Falls back to the existing
+                         "no announcements yet" copy if it doesn't (e.g. the
+                         category hasn't been created on GitHub yet).
 """
 import html
 import json
@@ -14,11 +20,17 @@ import urllib.request
 
 OWNER = "LUMS-WIT"
 REPO = "climate-futures"
-TARGET_FILE = "discussions.html"
-START_MARKER = "<!-- DISCUSSIONS:START -->"
-END_MARKER = "<!-- DISCUSSIONS:END -->"
+ANNOUNCEMENTS_CATEGORY_NAME = "Announcements"
 
-QUERY = """
+DISCUSSIONS_FILE = "discussions.html"
+DISCUSSIONS_START = "<!-- DISCUSSIONS:START -->"
+DISCUSSIONS_END = "<!-- DISCUSSIONS:END -->"
+
+ANNOUNCEMENTS_FILE = "index.html"
+ANNOUNCEMENTS_START = "<!-- ANNOUNCEMENTS:START -->"
+ANNOUNCEMENTS_END = "<!-- ANNOUNCEMENTS:END -->"
+
+OVERVIEW_QUERY = """
 query($owner: String!, $repo: String!) {
   repository(owner: $owner, name: $repo) {
     discussions(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
@@ -30,15 +42,30 @@ query($owner: String!, $repo: String!) {
         comments { totalCount }
       }
     }
+    discussionCategories(first: 25) {
+      nodes { id name }
+    }
+  }
+}
+"""
+
+CATEGORY_DISCUSSIONS_QUERY = """
+query($owner: String!, $repo: String!, $categoryId: ID!) {
+  repository(owner: $owner, name: $repo) {
+    discussions(first: 5, categoryId: $categoryId, orderBy: {field: CREATED_AT, direction: DESC}) {
+      nodes {
+        title
+        url
+        createdAt
+      }
+    }
   }
 }
 """
 
 
-def fetch(token):
-    body = json.dumps(
-        {"query": QUERY, "variables": {"owner": OWNER, "repo": REPO}}
-    ).encode()
+def graphql(token, query, variables):
+    body = json.dumps({"query": query, "variables": variables}).encode()
     req = urllib.request.Request(
         "https://api.github.com/graphql",
         data=body,
@@ -49,10 +76,14 @@ def fetch(token):
         },
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.load(resp)
+        data = json.load(resp)
+    if "errors" in data:
+        print(json.dumps(data["errors"]), file=sys.stderr)
+        sys.exit(1)
+    return data["data"]
 
 
-def render(nodes):
+def render_discussions_list(nodes):
     if not nodes:
         return (
             '<p class="text-secondary">No discussions have been posted yet. '
@@ -73,35 +104,81 @@ def render(nodes):
     return '<ul class="resource-list">\n' + "\n".join(items) + "\n</ul>"
 
 
+def render_announcements(nodes):
+    if not nodes:
+        return (
+            '<p class="empty-state">No announcements yet. Check back here for '
+            "updates throughout the semester.</p>"
+        )
+    items = []
+    for n in nodes:
+        title = html.escape(n["title"])
+        url = html.escape(n["url"], quote=True)
+        posted = n["createdAt"][:10]
+        items.append(
+            f'<li><div class="r-title"><a href="{url}" target="_blank" rel="noopener">{title}</a></div>'
+            f'<div class="r-meta">Posted {posted}</div></li>'
+        )
+    return '<ul class="resource-list">\n' + "\n".join(items) + "\n</ul>"
+
+
+def replace_between_markers(path, start_marker, end_marker, new_inner_html):
+    with open(path, encoding="utf-8") as f:
+        content = f.read()
+
+    pattern = re.compile(
+        re.escape(start_marker) + r".*?" + re.escape(end_marker), re.DOTALL
+    )
+    if not pattern.search(content):
+        print(f"Markers not found in {path}", file=sys.stderr)
+        sys.exit(1)
+
+    replacement = f"{start_marker}\n{new_inner_html}\n{end_marker}"
+    new_content = pattern.sub(lambda m: replacement, content)
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(new_content)
+
+
 def main():
     token = os.environ.get("GITHUB_TOKEN")
     if not token:
         print("GITHUB_TOKEN not set", file=sys.stderr)
         sys.exit(1)
 
-    data = fetch(token)
-    if "errors" in data:
-        print(json.dumps(data["errors"]), file=sys.stderr)
-        sys.exit(1)
+    overview = graphql(
+        token, OVERVIEW_QUERY, {"owner": OWNER, "repo": REPO}
+    )["repository"]
 
-    nodes = data["data"]["repository"]["discussions"]["nodes"]
-    list_html = render(nodes)
-
-    with open(TARGET_FILE, encoding="utf-8") as f:
-        content = f.read()
-
-    pattern = re.compile(
-        re.escape(START_MARKER) + r".*?" + re.escape(END_MARKER), re.DOTALL
+    discussions_html = render_discussions_list(overview["discussions"]["nodes"])
+    replace_between_markers(
+        DISCUSSIONS_FILE, DISCUSSIONS_START, DISCUSSIONS_END, discussions_html
     )
-    if not pattern.search(content):
-        print(f"Markers not found in {TARGET_FILE}", file=sys.stderr)
-        sys.exit(1)
 
-    replacement = f"{START_MARKER}\n{list_html}\n{END_MARKER}"
-    new_content = pattern.sub(lambda m: replacement, content)
+    category_id = next(
+        (
+            c["id"]
+            for c in overview["discussionCategories"]["nodes"]
+            if c["name"] == ANNOUNCEMENTS_CATEGORY_NAME
+        ),
+        None,
+    )
 
-    with open(TARGET_FILE, "w", encoding="utf-8") as f:
-        f.write(new_content)
+    if category_id:
+        cat_data = graphql(
+            token,
+            CATEGORY_DISCUSSIONS_QUERY,
+            {"owner": OWNER, "repo": REPO, "categoryId": category_id},
+        )
+        announcements_html = render_announcements(
+            cat_data["repository"]["discussions"]["nodes"]
+        )
+    else:
+        announcements_html = render_announcements([])
+
+    replace_between_markers(
+        ANNOUNCEMENTS_FILE, ANNOUNCEMENTS_START, ANNOUNCEMENTS_END, announcements_html
+    )
 
 
 if __name__ == "__main__":
