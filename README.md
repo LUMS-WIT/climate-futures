@@ -14,7 +14,7 @@ By the end of the course, students will be able to:
 3. Apply computational modeling and data visualization tools to develop pathways for energy, water, and agriculture systems.
 4. Interpret and communicate complex scenario results to technical and non-technical audiences.
 
-The course runs 14 weeks across 7 modules — climate science foundations, policy landscape, scenarios/IAMs, and sector deep-dives into energy, water, and agriculture — culminating in a nexus-focused capstone project grounded in Indus Basin case studies. Full breakdown in [schedule.html](schedule.html) and [syllabus.html](syllabus.html).
+The course runs 14 weeks across 4 modules — climate science foundations, the policy landscape, scenarios & integrated assessment, and an energy–water–agriculture nexus module — culminating in capstone presentations grounded in Indus Basin case studies. Full breakdown in [schedule.html](schedule.html) and [syllabus.html](syllabus.html).
 
 ## Instructor
 
@@ -30,7 +30,7 @@ Office Hours: Wednesdays, 2:00–4:00 PM
 /
 ├── index.html          Home
 ├── syllabus.html        Course description, CLOs, grading, policies
-├── schedule.html         14-week / 7-module schedule
+├── schedule.html         14-week / 4-module schedule
 ├── assignments.html      Assignment stub table
 ├── resources.html        Textbooks, discussion papers, tools & datasets
 ├── project.html          Capstone project page
