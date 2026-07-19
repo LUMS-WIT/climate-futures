@@ -163,8 +163,6 @@ main { flex: 1; }
   margin: 1.5rem 0 2rem;
 }
 
-.instructor-block h3 { margin-top: 0; }
-
 .instructor-block .role {
   color: var(--text-secondary);
   margin-bottom: 0.75rem;
