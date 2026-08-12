@@ -19,11 +19,12 @@ The course runs 14 weeks across 4 modules — climate science foundations, the p
 ## Instructor
 
 **Muhammad Awais**
-Assistant Research Professor, Centre for Water Informatics & Technology (WIT), LUMS
+Assistant Research Professor, 
+Centre for Water Informatics & Technology (WIT), LUMS
 Research Scholar, Energy, Climate and Environment Program, IIASA
 Email: awais.m@lums.edu.pk
 Office Hours: Wednesdays, 2:00–4:00 PM
-Office: Room No. 9-201A. Maxwell Wing. 2nd Floor. SSE Bldg.
+Office: Room No. 9-201A Maxwell Wing. 2nd Floor. SSE Bldg.
 
 ## Structure
 
