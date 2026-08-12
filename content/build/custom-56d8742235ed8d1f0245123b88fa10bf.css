@@ -1,0 +1,35 @@
+/* Approximates the main site's design system inside MyST's book-theme chrome.
+   Full parity isn't possible — sidebar/search/TOC structure is MyST's own component
+   tree, not reachable via CSS alone. See CLAUDE.md. */
+
+:root {
+  --color-primary: #4d7e5e;
+  --color-link: #4d7e5e;
+}
+
+body,
+.content,
+article {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+a {
+  color: #4d7e5e;
+  text-decoration: underline;
+}
+
+.shadow,
+.rounded,
+[class*="shadow-"],
+[class*="rounded-"] {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.admonition {
+  border-left: 4px solid #4d7e5e;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fafaf9;
+}

@@ -1,0 +1,46 @@
+version: 1
+project:
+  id: climate-futures-content
+  title: Content — Climate Change Governance
+  description: Pre-class readings, lecture notes, and hands-on material for ENGG562/ENV462, organized by week.
+  authors:
+    - name: Muhammad Awais
+      email: awais.m@lums.edu.pk
+  github: https://github.com/lums-wit/climate-futures
+  toc:
+    - file: index.md
+    - title: Module 1 — Climate Science Foundations
+      children:
+        - file: modules/module-1.md
+        - file: weeks/week-01.md
+        - file: weeks/week-02.md
+        - file: weeks/week-03.md
+    - title: Module 2 — Policy Landscape
+      children:
+        - file: modules/module-2.md
+        - file: weeks/week-04.md
+        - file: weeks/week-05.md
+    - title: Module 3 — Scenarios & Integrated Assessment
+      children:
+        - file: modules/module-3.md
+        - file: weeks/week-06.md
+        - file: weeks/week-07.md
+        - file: weeks/week-08.md
+    - title: Module 4 — Energy–Water–Agriculture Nexus
+      children:
+        - file: modules/module-4.md
+        - file: weeks/week-09.md
+        - file: weeks/week-10.md
+        - file: weeks/week-11.md
+        - file: weeks/week-12.md
+        - file: weeks/week-13.md
+    - file: weeks/week-14.md
+site:
+  template: book-theme
+  title: Content — Climate Change Governance
+  options:
+    style: _static/custom.css
+    favicon: ../images/stripes-pakistan.png
+  nav:
+    - title: Main Site
+      url: ../index.html
