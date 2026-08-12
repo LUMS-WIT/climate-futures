@@ -30,11 +30,17 @@ jobs:
           BASE_URL: /climate-futures/content
         run: npx -y mystmd build --html
 
+      - name: Build Marp slide decks
+        working-directory: content-src
+        run: npx -y @marp-team/marp-cli --input-dir slides --theme _static/marp-theme.css -o _build/slides --html
+
       - name: Sync build output into content/
         run: |
           rm -rf content
           mkdir -p content
           cp -r content-src/_build/html/. content/
+          mkdir -p content/slides
+          cp -r content-src/_build/slides/. content/slides/
 
       - name: Commit if changed
         run: |

@@ -3,9 +3,6 @@ project:
   id: climate-futures-content
   title: Content — Climate Change Governance
   description: Pre-class readings, lecture notes, and hands-on material for ENGG562/ENV462, organized by week.
-  authors:
-    - name: Muhammad Awais
-      email: awais.m@lums.edu.pk
   github: https://github.com/lums-wit/climate-futures
   toc:
     - file: index.md
