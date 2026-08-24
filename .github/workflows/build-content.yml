@@ -41,6 +41,9 @@ jobs:
           cp -r content-src/_build/html/. content/
           mkdir -p content/slides
           cp -r content-src/_build/slides/. content/slides/
+          if [ -d content-src/slides/img ]; then
+            cp -r content-src/slides/img content/slides/img
+          fi
 
       - name: Commit if changed
         run: |
