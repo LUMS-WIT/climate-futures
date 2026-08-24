@@ -11,8 +11,6 @@ Readings for this week:
 - IPCC AR6 WGIII Ch. 3: Mitigation pathways
 - O'Neill et al. (2017)
 
-[Slides for this week](/slides/week-06.html)
-
 ## In-Class
 
 Discussion: O'Neill et al. (2017) · Project milestone 1 — proposal due
