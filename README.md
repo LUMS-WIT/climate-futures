@@ -40,3 +40,7 @@ Office: Room No. 9-201A Maxwell Wing. 2nd Floor. SSE Bldg.
 │   └── style.css         All site styles
 └── README.md
 ```
+
+## License
+
+Site code (HTML/CSS, scripts, MyST config) is MIT-licensed — see [LICENSE](LICENSE). Course content (lecture notes, slides, week pages under `content-src/`/`content/`) is licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — see [LICENSE-CONTENT](LICENSE-CONTENT).
