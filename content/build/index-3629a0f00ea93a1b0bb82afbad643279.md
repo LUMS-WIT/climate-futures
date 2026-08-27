@@ -11,3 +11,7 @@ This section is separate from the course logistics pages — see [Schedule](../s
 - [Module 3: Scenarios & Integrated Assessment](modules/module-3.md) — Weeks 6–8
 - [Module 4: Energy–Water–Agriculture Nexus](modules/module-4.md) — Weeks 9–13
 - [Week 14 — Capstone Project Presentations](weeks/week-14.md)
+
+## License
+
+Course content on this page and throughout this section is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Share and adapt with attribution to Muhammad Awais, ENGG562/ENV462 Climate Change Governance: Science, Data & Models, LUMS.
