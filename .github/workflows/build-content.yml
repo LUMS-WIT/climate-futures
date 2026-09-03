@@ -39,6 +39,10 @@ jobs:
             mkdir -p content/slides
             cp content-src/slides/*.pdf content/slides/
           fi
+          if [ -d content-src/interactives ] && [ -n "$(find content-src/interactives -maxdepth 1 -name '*.html' -print -quit)" ]; then
+            mkdir -p content/interactives
+            cp content-src/interactives/*.html content/interactives/
+          fi
 
       - name: Commit if changed
         run: |
