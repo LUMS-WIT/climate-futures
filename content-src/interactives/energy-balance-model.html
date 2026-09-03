@@ -109,7 +109,6 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 <div class="wrap">
 
 <h1>Energy Balance Model</h1>
-<p class="sub">Understanding energy balance through a simple example, step by step. ENGG562 / ENV462 &mdash; Climate Change Governance.</p>
 
 <div class="layout">
 <div class="main-col">
@@ -158,10 +157,10 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
 <g id="sun" class="el">
 <line x1="118" y1="46" x2="118" y2="302" stroke="#eda100" stroke-width="2.5" marker-end="url(#ay)"/>
-<text x="128" y="64" fill="#7a4a0a" font-size="13" font-weight="600">340 W/m&#178;</text>
-<text x="128" y="78" fill="#7a4a0a" font-size="10" opacity=".85">arriving (S&#8320;&#8725;4)</text>
-<text x="128" y="286" fill="#7a4a0a" font-size="14" font-weight="600">240 W/m&#178;</text>
-<text x="128" y="300" fill="#7a4a0a" font-size="10.5">absorbed &#8212; 30% reflected</text>
+<text id="sunIn" x="128" y="56" fill="#7a4a0a" font-size="13" font-weight="600">340 W/m&#178;</text>
+<text x="128" y="68" fill="#7a4a0a" font-size="10" opacity=".85">arriving (S&#8320;&#8725;4)</text>
+<text id="sunAbs" x="128" y="82" fill="#7a4a0a" font-size="14" font-weight="600">240 W/m&#178;</text>
+<text id="sunPct" x="128" y="94" fill="#7a4a0a" font-size="10.5">absorbed &#8212; 30% reflected</text>
 </g>
 
 <g id="bare" class="el">
@@ -178,8 +177,8 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
 <g id="hiup" class="el">
 <line x1="360" y1="98" x2="360" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
-<text id="outv" x="370" y="76" fill="#9e2d20" font-size="14" font-weight="600">236 W/m&#178;</text>
-<text id="outl" x="370" y="92" fill="#9e2d20" font-size="10.5">out to space</text>
+<text id="outv" x="392" y="60" fill="#9e2d20" font-size="14" font-weight="600">236 W/m&#178;</text>
+<text id="outl" x="392" y="72" fill="#9e2d20" font-size="9.5">out to space</text>
 </g>
 
 <g id="surfup" class="el">
@@ -452,6 +451,15 @@ function fcalc(){
   var label=f.co2?f.n+" ("+ppm+" ppm)":f.n;
   document.getElementById("gapt").textContent=(F>=0?"+":"")+F.toFixed(2)+" W/m² imbalance — "+label;
   document.querySelector("#gap rect").setAttribute("fill",F>=0?"#b3402f":"#185fa5");
+
+  // the calculation feeds straight back into the diagram above: Tₐ stays
+  // pinned (the top of atmosphere always returns to 240 out), only Tₛ moves
+  var TsNew=288+dtNo;
+  document.getElementById("ta").textContent="Tₐ = 255 K";
+  document.getElementById("ts").textContent="Tₛ = "+TsNew.toFixed(0)+" K";
+  document.getElementById("outv").textContent="240 W/m²";
+  document.getElementById("outl").textContent="out to space — balanced";
+  document.getElementById("bkv").textContent="240 W/m²";
 }
 
 var IDS=["sun","bare","lay","hi","atmup","hiup","surfup","down","box","win","conv","gap"];
@@ -469,6 +477,11 @@ function draw(){
   var s=STEPS[si],i;
   for(i=0;i<IDS.length;i++)
     document.getElementById(IDS[i]).classList.toggle("vis",s.on.indexOf(IDS[i])>=0);
+  // the guided walkthrough always uses the real S₀/albedo — restore those
+  // canonical numbers even if the sandbox below last left different ones
+  document.getElementById("sunIn").textContent="340 W/m²";
+  document.getElementById("sunAbs").textContent="240 W/m²";
+  document.getElementById("sunPct").textContent="absorbed — 30% reflected";
   document.getElementById("ta").textContent=s.ta;
   document.getElementById("ts").textContent=s.ts;
   document.getElementById("dash").setAttribute("stroke-dasharray",s.dash?"5 4":"2 6");
@@ -508,7 +521,7 @@ document.addEventListener("keydown",function(e){
 draw();
 
 /* ---- sandbox ---- */
-function calc(){
+function calc(live){
   var S=+rS.value, a=+rA.value, n=+rN.value, F=+rF.value, fbk=fb.checked?3:1;
   var Q=S/4*(1-a);
   var Te=Math.pow(Q/SIG,0.25);
@@ -528,9 +541,26 @@ function calc(){
   msg+="Surface is "+c.toFixed(0)+" \u00b0C, against an observed 288 K (+15 \u00b0C).";
   if(F>0)msg+=" The forcing alone adds "+dT.toFixed(1)+" K.";
   cmp.textContent=msg;
+
+  // once the reader actually touches a control, drive the diagram above
+  // with these same numbers, live \u2014 left showing the guided walkthrough's
+  // canonical values until then, so the page doesn't open on a rounding
+  // mismatch (1361\u00f74\u00d70.70 = 238, not the teaching-rounded 240)
+  if(live){
+    document.getElementById("sunIn").textContent=(S/4).toFixed(0)+" W/m\u00b2";
+    document.getElementById("sunAbs").textContent=Q.toFixed(0)+" W/m\u00b2";
+    document.getElementById("sunPct").textContent="absorbed \u2014 "+(a*100).toFixed(0)+"% reflected";
+    document.getElementById("ta").textContent="T\u2090 = "+Te.toFixed(0)+" K";
+    document.getElementById("ts").textContent="T\u209b = "+Ts.toFixed(0)+" K";
+    document.getElementById("outv").textContent=Q.toFixed(0)+" W/m\u00b2";
+    document.getElementById("outl").textContent="out to space";
+    document.getElementById("bkv").textContent=Q.toFixed(0)+" W/m\u00b2";
+    document.getElementById("gapt").textContent="in = out = "+Q.toFixed(0)+" W/m\u00b2 \u2014 balanced";
+    document.querySelector("#gap rect").setAttribute("fill","#b3402f");
+  }
 }
-["rS","rA","rN","rF"].forEach(function(id){document.getElementById(id).oninput=calc;});
-fb.onchange=calc;
+["rS","rA","rN","rF"].forEach(function(id){document.getElementById(id).oninput=function(){calc(true);};});
+fb.onchange=function(){calc(true);};
 calc();
 </script>
 </body>
