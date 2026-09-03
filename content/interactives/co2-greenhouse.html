@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CO2 and surface temperature</title>
+<style>
+html,body{margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
+.wrap{max-width:900px;margin:0 auto;padding:24px 20px}
+@keyframes fall{from{transform:translateY(0);opacity:0}10%{opacity:1}90%{opacity:1}to{transform:translateY(300px);opacity:0}}
+@keyframes rise{from{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}to{transform:translateY(-300px);opacity:0}}
+@keyframes up{from{transform:translateY(0);opacity:0}20%{opacity:1}80%{opacity:1}to{transform:translateY(-108px);opacity:0}}
+@keyframes down{from{transform:translateY(0);opacity:0}20%{opacity:1}80%{opacity:1}to{transform:translateY(108px);opacity:0}}
+.f{animation:fall 3.4s linear infinite}
+.r{animation:rise 3.4s linear infinite}
+.u{animation:up 1.5s linear infinite}
+.d{animation:down 1.5s linear infinite}
+.x{opacity:0;transition:opacity .4s}
+#s.hi .x{opacity:1}
+#s.hi .esc{opacity:0}
+.esc{transition:opacity .4s}
+#s.hi #haze{opacity:.34}
+#haze{transition:opacity .4s}
+.bar{display:flex;align-items:center;gap:18px;margin-top:16px;font-size:16px;color:#4a4a4a}
+button{font:inherit;font-size:15px;padding:9px 18px;border:1px solid #4d7e5e;background:#ffffff;color:#2f5a41;border-radius:8px;cursor:pointer}
+button:hover{background:#f2f7f4}
+#t{font-size:30px;font-weight:500;color:#1a1a1a;min-width:96px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<svg id="s" width="100%" viewBox="0 0 680 430">
+<rect x="40" y="340" width="600" height="46" rx="6" fill="#639922" opacity="0.55"/>
+<rect id="haze" x="40" y="150" width="600" height="80" rx="8" fill="#378add" opacity="0.16"/>
+<rect x="40" y="150" width="600" height="80" rx="8" fill="none" stroke="#185fa5" stroke-width="0.5" stroke-dasharray="5 4" opacity="0.6"/>
+
+<text x="52" y="34" fill="#898781" font-size="12">space</text>
+<text x="52" y="146" fill="#185fa5" font-size="12" font-weight="500">atmosphere &#8212; CO&#8322; and H&#8322;O</text>
+<text x="52" y="372" fill="#27500a" font-size="13" font-weight="500">surface</text>
+
+<circle class="f" cx="100" cy="30" r="5" fill="#eda100"/>
+<circle class="f" cx="150" cy="30" r="5" fill="#eda100" style="animation-delay:1.1s"/>
+<circle class="f" cx="200" cy="30" r="5" fill="#eda100" style="animation-delay:2.2s"/>
+<text x="150" y="410" fill="#854f0b" font-size="12" text-anchor="middle" font-weight="500">sunlight in</text>
+
+<g class="esc">
+<circle class="r" cx="300" cy="336" r="5" fill="#e34948"/>
+<circle class="r" cx="300" cy="336" r="5" fill="#e34948" style="animation-delay:1.7s"/>
+</g>
+<circle class="r" cx="608" cy="336" r="5" fill="#e34948" style="animation-delay:.8s"/>
+<text x="608" y="410" fill="#a32d2d" font-size="12" text-anchor="middle">escapes</text>
+
+<circle class="u" cx="360" cy="336" r="5" fill="#e34948"/>
+<circle class="d" cx="400" cy="228" r="5" fill="#d95926" style="animation-delay:.75s"/>
+<circle class="u" cx="450" cy="336" r="5" fill="#e34948" style="animation-delay:.5s"/>
+<circle class="d" cx="490" cy="228" r="5" fill="#d95926" style="animation-delay:1.25s"/>
+
+<g class="x">
+<circle class="u" cx="240" cy="336" r="5" fill="#e34948" style="animation-delay:.3s"/>
+<circle class="d" cx="280" cy="228" r="5" fill="#d95926" style="animation-delay:1.05s"/>
+<circle class="u" cx="540" cy="336" r="5" fill="#e34948" style="animation-delay:.9s"/>
+<circle class="d" cx="575" cy="228" r="5" fill="#d95926" style="animation-delay:.15s"/>
+</g>
+
+<text x="405" y="410" fill="#a32d2d" font-size="12" text-anchor="middle" font-weight="500">infrared out &#8212; caught, then half sent back down</text>
+</svg>
+<div class="bar">
+<button onclick="tog()" id="b">Add CO&#8322;</button>
+<span>surface temperature</span>
+<span id="t">288 K</span>
+</div>
+</div>
+<script>
+var on=false;
+function tog(){on=!on;
+document.getElementById('s').classList.toggle('hi',on);
+document.getElementById('t').textContent=on?'291 K':'288 K';
+document.getElementById('b').textContent=on?'Remove CO\u2082':'Add CO\u2082';}
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Energy Balance Models &middot; ENGG562 / ENV462</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#ffffff;color:#1a1a1a;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:26px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:#6b6b6b;font-size:15px;margin:0 0 32px}
+h2{font-size:19px;font-weight:600;margin:52px 0 14px;letter-spacing:-.01em}
+a{color:#4d7e5e}
+
+/* step rail */
+.rail{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.rail button{font:inherit;font-size:12.5px;padding:6px 11px;border:1px solid #dcdcdc;background:#fff;
+ color:#6b6b6b;border-radius:7px;cursor:pointer;transition:.16s}
+.rail button:hover{border-color:#4d7e5e;color:#1a1a1a}
+.rail button.on{background:#4d7e5e;border-color:#4d7e5e;color:#fff}
+.rail button.hot.on{background:#b3402f;border-color:#b3402f}
+
+.stage{border:1px solid #e6e6e6;border-radius:12px;padding:20px 20px 8px}
+.stepttl{font-size:17px;font-weight:600;margin:0 0 2px}
+.steplede{color:#6b6b6b;font-size:14.5px;margin:0 0 14px}
+
+/* calculation board */
+.board{background:#fafaf8;border:1px solid #ececea;border-radius:10px;padding:14px 18px;margin-top:16px;min-height:132px}
+.board .ln{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:14px;line-height:1.95;
+ color:#1a1a1a;opacity:0;transform:translateY(-3px);transition:opacity .35s,transform .35s}
+.board .ln.show{opacity:1;transform:none}
+.board .ln.dim{color:#6b6b6b}
+.board .ln.key{color:#2f5a41;font-weight:600}
+
+.nav{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid #eee}
+.nav button{font:inherit;font-size:14px;padding:9px 18px;border-radius:8px;cursor:pointer;border:1px solid #4d7e5e;background:#4d7e5e;color:#fff}
+.nav button.ghost{background:#fff;color:#2f5a41}
+.nav button:disabled{opacity:.35;cursor:default}
+.nav .hint{margin-left:auto;font-size:12.5px;color:#9a9a9a}
+
+/* sliders */
+.panel{border:1px solid #e6e6e6;border-radius:12px;padding:22px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 32px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.ctl label{display:block;font-size:13.5px;color:#4a4a4a;margin-bottom:2px}
+.ctl .val{float:right;font-family:"SF Mono",Menlo,monospace;font-size:13px;color:#1a1a1a}
+input[type=range]{width:100%;accent-color:#4d7e5e;margin:4px 0 0}
+.chk{font-size:13.5px;color:#4a4a4a;display:flex;align-items:center;gap:8px;margin-top:4px}
+.out{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid #eee;text-align:center}
+.out div span{display:block}
+.out .k{font-size:12px;color:#6b6b6b;letter-spacing:.02em}
+.out .v{font-size:25px;font-weight:600;margin-top:2px}
+.note{font-size:13px;color:#6b6b6b;margin-top:16px}
+
+/* glossary */
+details{border-bottom:1px solid #eee;padding:12px 0}
+summary{cursor:pointer;font-weight:500;font-size:15.5px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"+";color:#4d7e5e;font-weight:600;margin-right:10px}
+details[open] summary:before{content:"\2013"}
+details p{margin:10px 0 0 24px;font-size:14.5px;color:#3d3d3d}
+details p.n{color:#6b6b6b;font-size:13.5px}
+
+.el{opacity:0;transition:opacity .45s}
+.el.vis{opacity:1}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px;color:#9a9a9a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>From bare rock to a warming planet</h1>
+<p class="sub">Energy balance models, one step at a time. ENGG562 / ENV462 &mdash; Climate Change Governance.</p>
+
+<div class="rail" id="rail"></div>
+
+<div class="stage">
+  <div class="stepttl" id="sttl"></div>
+  <p class="steplede" id="slede"></p>
+
+<svg width="100%" viewBox="0 0 680 400" aria-label="Energy balance diagram">
+<defs>
+<marker id="ay" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#eda100"/></marker>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#d3402f"/></marker>
+<marker id="ao" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#c25a1e"/></marker>
+<marker id="at" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#0f8a7a"/></marker>
+</defs>
+
+<line x1="30" y1="42" x2="650" y2="42" stroke="#b5b5b5" stroke-width="1" stroke-dasharray="6 5"/>
+<text x="36" y="32" fill="#9a9a9a" font-size="11">top of atmosphere</text>
+
+<g id="hi" class="el">
+<rect x="30" y="104" width="620" height="32" rx="6" fill="#7a4fd6" opacity=".13"/>
+<rect x="30" y="104" width="620" height="32" rx="6" fill="none" stroke="#5b32b0" stroke-width=".6" stroke-dasharray="4 4" opacity=".7"/>
+<text x="42" y="124" fill="#5b32b0" font-size="11.5" font-weight="500">emission to space now happens here &#8212; higher, and colder</text>
+</g>
+
+<g id="lay" class="el">
+<rect x="30" y="162" width="620" height="52" rx="7" fill="#378add" opacity=".15"/>
+<rect id="dash" x="30" y="162" width="620" height="52" rx="7" fill="none" stroke="#185fa5" stroke-width=".6" stroke-dasharray="5 4" opacity=".55"/>
+<text x="42" y="183" fill="#185fa5" font-size="12" font-weight="500">atmosphere</text>
+<text id="ta" x="42" y="203" fill="#185fa5" font-size="15" font-weight="600">T&#8336; = ?</text>
+</g>
+
+<rect x="30" y="308" width="620" height="40" rx="6" fill="#639922" opacity=".45"/>
+<text x="42" y="325" fill="#27500a" font-size="12" font-weight="500">surface</text>
+<text id="ts" x="42" y="343" fill="#27500a" font-size="15" font-weight="600">T&#8347; = 255 K</text>
+
+<g id="sun" class="el">
+<line x1="118" y1="46" x2="118" y2="302" stroke="#eda100" stroke-width="2.5" marker-end="url(#ay)"/>
+<text x="128" y="80" fill="#7a4a0a" font-size="14" font-weight="600">240</text>
+<text x="128" y="96" fill="#7a4a0a" font-size="10.5">sunlight in</text>
+</g>
+
+<g id="bare" class="el">
+<line x1="250" y1="302" x2="250" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="260" y="80" fill="#9e2d20" font-size="14" font-weight="600">240</text>
+<text x="260" y="96" fill="#9e2d20" font-size="10.5">surface &#8594; space</text>
+</g>
+
+<g id="atmup" class="el">
+<line x1="360" y1="156" x2="360" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="370" y="80" fill="#9e2d20" font-size="14" font-weight="600">240</text>
+<text x="370" y="96" fill="#9e2d20" font-size="10.5">layer &#8594; space</text>
+</g>
+
+<g id="hiup" class="el">
+<line x1="360" y1="98" x2="360" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
+<text id="outv" x="370" y="76" fill="#9e2d20" font-size="14" font-weight="600">236</text>
+<text id="outl" x="370" y="92" fill="#9e2d20" font-size="10.5">out to space</text>
+</g>
+
+<g id="surfup" class="el">
+<line x1="360" y1="302" x2="360" y2="220" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
+<text x="370" y="252" fill="#9e2d20" font-size="14" font-weight="600">&#963;T&#8347;&#8308;</text>
+<text x="370" y="268" fill="#9e2d20" font-size="10.5">absorbed by the layer</text>
+</g>
+
+<g id="down" class="el">
+<line x1="600" y1="220" x2="600" y2="302" stroke="#c25a1e" stroke-width="2.5" marker-end="url(#ao)"/>
+<text id="bkv" x="590" y="252" fill="#8f3f11" font-size="14" font-weight="600" text-anchor="end">240</text>
+<text x="590" y="268" fill="#8f3f11" font-size="10.5" text-anchor="end">back radiation</text>
+</g>
+
+<g id="box" class="el">
+<rect x="18" y="150" width="644" height="76" rx="10" fill="none" stroke="#4d7e5e" stroke-width="2" stroke-dasharray="7 5"/>
+</g>
+
+<g id="win" class="el">
+<line x1="470" y1="302" x2="470" y2="46" stroke="#d3402f" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<text x="478" y="80" fill="#9e2d20" font-size="13" font-weight="600">40</text>
+<text x="478" y="96" fill="#9e2d20" font-size="10.5">through the window</text>
+</g>
+
+<g id="conv" class="el">
+<line x1="180" y1="302" x2="180" y2="220" stroke="#0f8a7a" stroke-width="2.5" marker-end="url(#at)"/>
+<text x="190" y="252" fill="#0a6154" font-size="13" font-weight="600">80</text>
+<text x="190" y="268" fill="#0a6154" font-size="10.5">evaporation</text>
+<line x1="286" y1="302" x2="286" y2="220" stroke="#0f8a7a" stroke-width="2.5" marker-end="url(#at)"/>
+<text x="296" y="252" fill="#0a6154" font-size="13" font-weight="600">20</text>
+<text x="296" y="268" fill="#0a6154" font-size="10.5">convection</text>
+</g>
+
+<g id="gap" class="el">
+<rect x="170" y="368" width="350" height="26" rx="13" fill="#b3402f" opacity=".11"/>
+<text id="gapt" x="345" y="386" fill="#9e2d20" font-size="13" font-weight="600" text-anchor="middle">240 in &#8722; 236 out = +3.7 W/m&#178; piling up</text>
+</g>
+</svg>
+
+  <div class="board" id="board"></div>
+
+  <div class="nav">
+    <button class="ghost" id="back">&#8592; Back</button>
+    <button id="fwd">Next &#8594;</button>
+    <span class="hint">or use the arrow keys</span>
+  </div>
+</div>
+
+<h2>Try it yourself</h2>
+<div class="panel">
+<div class="grid">
+  <div class="ctl"><label>Solar constant S&#8320; <span class="val" id="vS">1361 W/m&#178;</span></label>
+    <input type="range" id="rS" min="1200" max="1500" step="1" value="1361"></div>
+  <div class="ctl"><label>Albedo <span class="val" id="vA">0.30</span></label>
+    <input type="range" id="rA" min="0" max="0.7" step="0.01" value="0.30"></div>
+  <div class="ctl"><label>Absorbing layers n <span class="val" id="vN">1</span></label>
+    <input type="range" id="rN" min="0" max="4" step="1" value="1"></div>
+  <div class="ctl"><label>Extra CO&#8322; forcing <span class="val" id="vF">0.0 W/m&#178;</span></label>
+    <input type="range" id="rF" min="0" max="8.5" step="0.1" value="0">
+    <label class="chk"><input type="checkbox" id="fb"> include feedbacks (&times;3)</label></div>
+</div>
+<div class="out">
+  <div><span class="k">absorbed sunlight</span><span class="v" id="oQ"></span></div>
+  <div><span class="k">emission temperature T&#8336;</span><span class="v" id="oTa"></span></div>
+  <div><span class="k">surface temperature T&#8347;</span><span class="v" id="oTs"></span></div>
+</div>
+<p class="note" id="cmp"></p>
+</div>
+
+<h2>Notes</h2>
+
+<details><summary>Evaporation &mdash; latent heat</summary>
+<p>Liquid water needs energy to become vapour: about 2.5 million joules per kilogram, taken from the surface it leaves. That energy is not lost, it is carried upward inside the vapour. When the vapour condenses into cloud, kilometres above the ground, the energy is released there instead.</p>
+<p class="n">So evaporation moves heat from the surface to the upper atmosphere without any radiation involved. It is a lift, not a staircase &mdash; the energy skips the queue. Globally it carries about 80 W/m&#178;, the single largest non-radiative transport, and it is the link between this lecture and the water cycle.</p></details>
+
+<details><summary>Convection &mdash; rising air</summary>
+<p>Air warmed by contact with the ground becomes less dense and rises, carrying its heat with it. Cooler air sinks to replace it. This is the same process as a boiling pot, operating over the whole troposphere.</p>
+<p class="n">Convection carries roughly 20 W/m&#178; upward and, more importantly, it sets the shape of the temperature profile: about 6.5 K of cooling per kilometre of altitude. Radiation decides <em>where</em> the planet must sit at 255 K; convection decides how temperature falls between there and the ground.</p></details>
+
+<details><summary>Albedo &mdash; reflection is not absorption</summary>
+<p>About 30% of arriving sunlight is reflected straight back to space by clouds, ice and bright land. It bounces at the same wavelength it arrived and warms nothing on the way.</p>
+<p class="n">This is why the balance equations use 240 W/m&#178; and not 340. Only absorbed energy has to be paid back. A mirror does not get hot.</p></details>
+
+<details><summary>Emissivity &mdash; why &#963; is universal but &#949; is not</summary>
+<p>The Stefan&ndash;Boltzmann constant &#963; applies to every object in the universe. What differs between materials is emissivity &#949;, between 0 and 1, in E = &#949;&#963;T&#8308;.</p>
+<p class="n">Earth's surface has &#949; &#8776; 0.95 in the infrared, close enough to 1 that we drop it. Note that emissivity is wavelength-dependent: fresh snow reflects 80% of visible light and is still a near-perfect emitter in the infrared. "Black" means black at the wavelengths in question.</p></details>
+
+<details><summary>Optical thickness &mdash; why more layers keep working</summary>
+<p>If one layer already absorbs everything, how can a second one matter? Because the top of the atmosphere is pinned at 255 K by the Sun and cannot move. Adding layers does not change the top &mdash; it adds more steps between the top and the ground, and each step has a temperature drop across it.</p>
+<p class="n">More steps, deeper the bottom: T&#8347; = (n+1)<sup>&#188;</sup> &times; 255 K. This is why "the CO&#8322; bands are already saturated" is not an argument against further warming. Full absorption is assumed in this model from the first line, and the effect still grows with n.</p></details>
+
+<details><summary>Radiative forcing &mdash; the units behind RCP and SSP</summary>
+<p>A forcing is a sustained imbalance at the top of the atmosphere, measured in W/m&#178;. Doubling CO&#8322; gives about 3.7 W/m&#178;.</p>
+<p class="n">This is the same unit as the 340 and the 240 above. RCP8.5 means an 8.5 W/m&#178; imbalance by 2100; RCP2.6 means 2.6. Under the AR6 names &mdash; SSP1-2.6, SSP5-8.5 &mdash; the trailing number is still the forcing.</p></details>
+
+<details><summary>Where this model is wrong, and why that is useful</summary>
+<p>Three named failures. The atmosphere is not perfectly absorbing: about 40 W/m&#178; leaves the surface directly through the 8&ndash;12 &#181;m window. Radiation is not the only transport: evaporation and convection move roughly 100 W/m&#178;. And the real atmosphere does absorb some sunlight on the way down, about 78 W/m&#178;, which this model sets to zero.</p>
+<p class="n">Bare rock is 33 K too cold. The perfect greenhouse is 15 K too warm. Reality sits between them &mdash; bracketed from both sides using nothing but conservation of energy.</p></details>
+
+<footer>Centre for Water Informatics &amp; Technology, LUMS. Numbers follow Trenberth, Fasullo &amp; Kiehl (2009) and IPCC AR6 WG1.</footer>
+</div>
+
+<script>
+var SIG=5.67e-8;
+
+var STEPS=[
+{t:"0 \u00b7 Bare rock",
+ d:"No atmosphere at all. One surface, one balance.",
+ on:["sun","bare"], ta:"", ts:"T\u209B = 255 K", dash:1,
+ L:["S\u2080 = 1361 W/m\u00b2 \u2014 perpendicular to the beam",
+    "\u00f7 4  (sphere 4\u03c0R\u00b2 vs disc \u03c0R\u00b2)  \u2192  340 W/m\u00b2",
+    "\u00d7 (1 \u2212 0.30) albedo  \u2192  240 W/m\u00b2 absorbed",
+    "&nbsp;",
+    "balance:   \u03c3T\u209B\u2074 = 240",
+    "T\u209B\u2074 = 240 / 5.67\u00d710\u207b\u2078 = 4.23\u00d710\u2079",
+    "T\u209B = \u221a(\u221a 4.23\u00d710\u2079) = \u221a 65,060",
+    "@T\u209B = 255 K = \u221218 \u00b0C",
+    "#observed 288 K \u2014 the model is 33 K too cold"]},
+
+{t:"1 \u00b7 Add the layer",
+ d:"Two rules, and both will eventually break.",
+ on:["sun","lay"], ta:"T\u2090 = ?", ts:"T\u209B = ?", dash:1,
+ L:["rule 1 \u2014 transparent to shortwave",
+    "#the 240 passes straight through, untouched",
+    "rule 2 \u2014 perfectly absorbing in longwave",
+    "#nothing from the surface escapes directly",
+    "&nbsp;",
+    "@two unknowns now: T\u2090 and T\u209B"]},
+
+{t:"2 \u00b7 Balance at the top",
+ d:"Draw a line at the top of the atmosphere. What crosses it?",
+ on:["sun","lay","atmup"], ta:"T\u2090 = 255 K", ts:"T\u209B = ?", dash:1,
+ L:["crossing down:   240      solar",
+    "crossing up:     \u03c3T\u2090\u2074    the layer's own emission",
+    "#the surface's radiation never reaches this line \u2014 rule 2",
+    "&nbsp;",
+    "\u03c3T\u2090\u2074 = 240",
+    "@T\u2090 = 255 K",
+    "#255 K did not vanish. It moved upstairs."]},
+
+{t:"3 \u00b7 Balance the layer alone",
+ d:"Box the layer. This is the step that carries the result.",
+ on:["sun","lay","atmup","surfup","down","box"], ta:"T\u2090 = 255 K", ts:"T\u209B = 303 K", dash:1,
+ L:["in:    \u03c3T\u209B\u2074   from below",
+    "       0      from the Sun \u2014 it passed through",
+    "out:   \u03c3T\u2090\u2074   upward",
+    "     + \u03c3T\u2090\u2074   downward   \u2190 a layer has two faces",
+    "&nbsp;",
+    "\u03c3T\u209B\u2074 = 2\u03c3T\u2090\u2074      \u03c3 cancels",
+    "T\u209B = 2^\u00bc \u00d7 T\u2090 = 1.189 \u00d7 255",
+    "@T\u209B = 303 K = +30 \u00b0C",
+    "#doubling the energy raises temperature by only 19%"]},
+
+{t:"4 \u00b7 Check at the surface",
+ d:"Same system, different boundary. It must give the same answer.",
+ on:["sun","lay","atmup","surfup","down"], ta:"T\u2090 = 255 K", ts:"T\u209B = 303 K", dash:1,
+ L:["in:    240   sunlight",
+    "     + 240   back radiation from the layer",
+    "     = 480",
+    "&nbsp;",
+    "\u03c3T\u209B\u2074 = 480   \u2192   T\u209B\u2074 = 8.47\u00d710\u2079",
+    "@T\u209B = 303 K  \u2713",
+    "#the surface receives twice the solar input \u2014 the Sun did not change"]},
+
+{t:"5 \u00b7 Reality",
+ d:"The model overshoots by 15 K. Three named failures.",
+ on:["sun","lay","atmup","surfup","down","win","conv"], ta:"T\u2090 = 255 K", ts:"T\u209B = 288 K", dash:0,
+ L:["the window   ~40 W/m\u00b2 leaves the surface directly (8\u201312 \u00b5m)",
+    "evaporation  ~80 W/m\u00b2 carried up as latent heat",
+    "convection   ~20 W/m\u00b2 carried up by rising air",
+    "#and the real atmosphere absorbs ~78 W/m\u00b2 of sunlight on the way down",
+    "&nbsp;",
+    "@three exits instead of one \u2192 303 K falls to 288 K",
+    "#more ways out means the surface need not be as hot"]},
+
+{t:"6 \u00b7 Add CO\u2082",
+ d:"The instant after. Nothing has had time to warm yet.",
+ on:["sun","lay","hi","hiup","surfup","down","win","conv","gap"],
+ ta:"T\u2090 = 255 K", ts:"T\u209B = 288 K", dash:0, out:"236", outl:"out to space \u2014 less than before", bk:"244",
+ gap:"240 in \u2212 236 out = +3.7 W/m\u00b2 piling up",
+ L:["more absorber \u2192 infrared is caught higher up",
+    "the last emission before space now happens where it is colder",
+    "colder emitter \u2192 emits less",
+    "&nbsp;",
+    "in:  240      unchanged \u2014 the Sun did nothing",
+    "out: 236",
+    "@imbalance = +3.7 W/m\u00b2",
+    "#nothing removes it. Over 90% ends up in the ocean."]},
+
+{t:"7 \u00b7 The new balance",
+ d:"Decades later. Where does it settle?",
+ on:["sun","lay","hi","hiup","surfup","down","win","conv","gap"],
+ ta:"T\u2090 = 255 K", ts:"T\u209B = 289 K", dash:0, out:"240", outl:"out to space \u2014 restored", bk:"248",
+ gap:"240 in \u2212 240 out = balanced again, but warmer",
+ L:["warm until \u03c3T\u2074 pushes 240 back out",
+    "&nbsp;",
+    "Planck response:  dE/dT = 4\u03c3T\u00b3 = 3.8 W/m\u00b2 per K",
+    "\u0394T\u209B = 3.7 / 3.8 \u2248 1 K",
+    "@T\u209B = 289 K",
+    "#feedbacks \u2014 water vapour, ice, cloud \u2014 roughly triple this",
+    "&nbsp;",
+    "@the top returns to 240. The surface does not return."]}
+];
+
+var IDS=["sun","bare","lay","hi","atmup","hiup","surfup","down","box","win","conv","gap"];
+var si=0, li=0;
+
+var rail=document.getElementById("rail");
+STEPS.forEach(function(s,i){
+  var b=document.createElement("button");
+  b.textContent=s.t; if(i>5)b.className="hot";
+  b.onclick=function(){si=i;li=STEPS[i].L.length;draw();};
+  rail.appendChild(b);
+});
+
+function draw(){
+  var s=STEPS[si],i;
+  for(i=0;i<IDS.length;i++)
+    document.getElementById(IDS[i]).classList.toggle("vis",s.on.indexOf(IDS[i])>=0);
+  document.getElementById("ta").textContent=s.ta;
+  document.getElementById("ts").textContent=s.ts;
+  document.getElementById("dash").setAttribute("stroke-dasharray",s.dash?"5 4":"2 6");
+  if(s.out){document.getElementById("outv").textContent=s.out;
+            document.getElementById("outl").textContent=s.outl;}
+  document.getElementById("bkv").textContent=s.bk||"240";
+  if(s.gap)document.getElementById("gapt").textContent=s.gap;
+  document.getElementById("sttl").textContent=s.t;
+  document.getElementById("slede").textContent=s.d;
+
+  var h="";
+  for(i=0;i<s.L.length;i++){
+    var raw=s.L[i], cl="ln", txt=raw;
+    if(raw.charAt(0)==="@"){cl+=" key";txt=raw.slice(1);}
+    else if(raw.charAt(0)==="#"){cl+=" dim";txt=raw.slice(1);}
+    if(i<li)cl+=" show";
+    h+='<div class="'+cl+'">'+txt+"</div>";
+  }
+  document.getElementById("board").innerHTML=h;
+
+  var btns=rail.children;
+  for(i=0;i<btns.length;i++)btns[i].classList.toggle("on",i===si);
+  document.getElementById("back").disabled=(si===0&&li===0);
+  document.getElementById("fwd").disabled=(si===STEPS.length-1&&li>=s.L.length);
+}
+function fwd(){ if(li<STEPS[si].L.length)li++; else if(si<STEPS.length-1){si++;li=0;} draw(); }
+function back(){ if(li>0)li--; else if(si>0){si--;li=STEPS[si].L.length;} draw(); }
+document.getElementById("fwd").onclick=fwd;
+document.getElementById("back").onclick=back;
+document.addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight"||e.key===" "){fwd();e.preventDefault();}
+  if(e.key==="ArrowLeft"){back();e.preventDefault();}
+});
+draw();
+
+/* ---- sandbox ---- */
+function calc(){
+  var S=+rS.value, a=+rA.value, n=+rN.value, F=+rF.value, fbk=fb.checked?3:1;
+  var Q=S/4*(1-a);
+  var Te=Math.pow(Q/SIG,0.25);
+  var Ts=Math.pow(n+1,0.25)*Te;
+  var dT=F*fbk/(4*SIG*Math.pow(Te,3));
+  Ts+=dT;
+  vS.textContent=S+" W/m\u00b2";
+  vA.textContent=a.toFixed(2);
+  vN.textContent=n;
+  vF.textContent=F.toFixed(1)+" W/m\u00b2";
+  oQ.textContent=Q.toFixed(0);
+  oTa.textContent=Te.toFixed(0)+" K";
+  oTs.textContent=Ts.toFixed(0)+" K";
+  var c=Ts-273.15, msg;
+  if(n===0)msg="Bare rock. ";
+  else msg=n+" perfectly absorbing layer"+(n>1?"s":"")+". ";
+  msg+="Surface is "+c.toFixed(0)+" \u00b0C, against an observed 288 K (+15 \u00b0C).";
+  if(F>0)msg+=" The forcing alone adds "+dT.toFixed(1)+" K.";
+  cmp.textContent=msg;
+}
+["rS","rA","rN","rF"].forEach(function(id){document.getElementById(id).oninput=calc;});
+fb.onchange=calc;
+calc();
+</script>
+</body>
+</html>
