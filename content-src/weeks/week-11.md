@@ -4,19 +4,6 @@
 
 🛠 Hands-on / tool session · 📄 Discussion session
 
-## Pre-Class
+## Learning Outcomes
 
-Readings for this week:
-
-- Schneider 2010 (Ch. 10)
-- Willett et al. (2019, EAT–Lancet)
-
-```{admonition} TODO — instructor content
-:class: attention
-Lecture slides, pre-class notes, and any notebooks for this week go here.
-```
-
-## In-Class
-
-Discussion: Willett et al. (2019)
-
+TBA

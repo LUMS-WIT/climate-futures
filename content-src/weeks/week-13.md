@@ -2,18 +2,6 @@
 
 *Module 4: Energy–Water–Agriculture Nexus*
 
-## Pre-Class
+## Learning Outcomes
 
-Readings for this week:
-
-- No assigned readings this week.
-
-```{admonition} TODO — instructor content
-:class: attention
-Lecture slides, pre-class notes, and any notebooks for this week go here.
-```
-
-## In-Class
-
-Project milestone 3 — policy brief draft
-
+TBA

@@ -4,18 +4,6 @@
 
 🛠 Hands-on / tool session
 
-## Pre-Class
+## Learning Outcomes
 
-Readings for this week:
-
-- Schneider 2010 (Ch. 6)
-
-```{admonition} TODO — instructor content
-:class: attention
-Lecture slides, pre-class notes, and any notebooks for this week go here.
-```
-
-## In-Class
-
-Project milestone 2 — progress check-in
-
+TBA

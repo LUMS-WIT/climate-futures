@@ -4,14 +4,6 @@
 
 🛠 Hands-on / tool session · 📄 Discussion session
 
-## Pre-Class
+## Learning Outcomes
 
-Readings for this week:
-
-- IPCC AR6 WGIII Ch. 3: Mitigation pathways
-- O'Neill et al. (2017)
-
-## In-Class
-
-Discussion: O'Neill et al. (2017) · Project milestone 1 — proposal due
-
+TBA

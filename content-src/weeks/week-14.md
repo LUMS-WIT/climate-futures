@@ -2,18 +2,6 @@
 
 *Week 14 — Capstone*
 
-## Pre-Class
+## Learning Outcomes
 
-Readings for this week:
-
-- No assigned readings this week.
-
-```{admonition} TODO — instructor content
-:class: attention
-Lecture slides, pre-class notes, and any notebooks for this week go here.
-```
-
-## In-Class
-
-Final capstone presentations and project defense
-
+TBA

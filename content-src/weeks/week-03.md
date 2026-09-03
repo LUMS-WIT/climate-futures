@@ -4,20 +4,6 @@
 
 📄 Discussion session
 
-## Pre-Class
+## Learning Outcomes
 
-Readings for this week:
-
-- Hansen et al. (1988)
-- Krauss 2021 (Ch. 2–5, 7–8)
-- Schneider 2010 (Ch. 1–2)
-
-```{admonition} TODO — instructor content
-:class: attention
-Lecture slides, pre-class notes, and any notebooks for this week go here.
-```
-
-## In-Class
-
-Discussion: Hansen et al. (1988)
-
+TBA
