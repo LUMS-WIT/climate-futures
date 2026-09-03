@@ -10,15 +10,28 @@ html,body{margin:0;padding:0;background:#ffffff;color:#1a1a1a;
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .wrap{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+@media(min-width:1180px){.wrap{max-width:1180px}}
+@media(min-width:1560px){.wrap{max-width:1560px}}
+
+/* page layout — sliders stack under the stage by default, move to a sticky
+   sidebar on very wide screens where there is horizontal room to spare */
+.layout{display:block}
+@media(min-width:1560px){
+  .layout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+  .side-col{position:sticky;top:24px}
+  .side-col h2{margin-top:0}
+  .side-col .grid{grid-template-columns:1fr}
+  .side-col .out{grid-template-columns:1fr}
+}
 h1{font-size:26px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
 .sub{color:#6b6b6b;font-size:15px;margin:0 0 32px}
 h2{font-size:19px;font-weight:600;margin:52px 0 14px;letter-spacing:-.01em}
 a{color:#4d7e5e}
 
 /* step rail */
-.rail{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.rail{display:flex;flex-wrap:wrap;gap:6px}
 .rail button{font:inherit;font-size:12.5px;padding:6px 11px;border:1px solid #dcdcdc;background:#fff;
- color:#6b6b6b;border-radius:7px;cursor:pointer;transition:.16s}
+ color:#6b6b6b;border-radius:7px;cursor:pointer;transition:.16s;text-align:left}
 .rail button:hover{border-color:#4d7e5e;color:#1a1a1a}
 .rail button.on{background:#4d7e5e;border-color:#4d7e5e;color:#fff}
 .rail button.hot.on{background:#b3402f;border-color:#b3402f}
@@ -26,6 +39,14 @@ a{color:#4d7e5e}
 .stage{border:1px solid #e6e6e6;border-radius:12px;padding:20px 20px 8px}
 .stepttl{font-size:17px;font-weight:600;margin:0 0 2px}
 .steplede{color:#6b6b6b;font-size:14.5px;margin:0 0 14px}
+
+/* controls sidebar + visual column — stacked by default, side-by-side on wide screens */
+.stage-body{display:grid;grid-template-columns:1fr;gap:20px}
+.controls-col{display:flex;flex-direction:column;gap:16px}
+@media(min-width:1000px){
+  .stage-body{grid-template-columns:220px 1fr;align-items:start}
+  .rail{flex-direction:column}
+}
 
 /* calculation board */
 .board{background:#fafaf8;border:1px solid #ececea;border-radius:10px;padding:14px 18px;margin-top:16px;min-height:132px}
@@ -35,11 +56,26 @@ a{color:#4d7e5e}
 .board .ln.dim{color:#6b6b6b}
 .board .ln.key{color:#2f5a41;font-weight:600}
 
-.nav{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid #eee}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding-top:16px;border-top:1px solid #eee}
 .nav button{font:inherit;font-size:14px;padding:9px 18px;border-radius:8px;cursor:pointer;border:1px solid #4d7e5e;background:#4d7e5e;color:#fff}
 .nav button.ghost{background:#fff;color:#2f5a41}
 .nav button:disabled{opacity:.35;cursor:default}
 .nav .hint{margin-left:auto;font-size:12.5px;color:#9a9a9a}
+@media(min-width:1000px){.nav{margin-top:auto}.nav .hint{margin-left:0;flex-basis:100%}}
+
+/* radiative-forcing driver picker — step 8 only */
+.forcing-picker{margin-top:16px}
+.fp-row{display:flex;flex-wrap:wrap;gap:8px}
+.fp-row button{font:inherit;font-size:12.5px;padding:7px 12px;border:1px solid #dcdcdc;background:#fff;
+ color:#4a4a4a;border-radius:7px;cursor:pointer;transition:.16s}
+.fp-row button:hover{border-color:#4d7e5e;color:#1a1a1a}
+.fp-row button.on{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+.fp-out{margin-top:10px;font-size:13.5px;color:#3d3d3d}
+.fp-out b{color:#1a1a1a}
+.fp-co2{margin-top:14px;padding-top:14px;border-top:1px dashed #e6e6e6}
+.fp-co2 label{display:block;font-size:13.5px;color:#4a4a4a;margin-bottom:2px}
+.fp-co2 .val{float:right;font-family:"SF Mono",Menlo,monospace;font-size:13px;color:#1a1a1a}
+.fp-co2-note{font-size:12px;color:#8a8a8a;margin:8px 0 0}
 
 /* sliders */
 .panel{border:1px solid #e6e6e6;border-radius:12px;padding:22px}
@@ -72,14 +108,25 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 <body>
 <div class="wrap">
 
-<h1>From bare rock to a warming planet</h1>
-<p class="sub">Energy balance models, one step at a time. ENGG562 / ENV462 &mdash; Climate Change Governance.</p>
+<h1>Energy Balance Model</h1>
+<p class="sub">Understanding energy balance through a simple example, step by step. ENGG562 / ENV462 &mdash; Climate Change Governance.</p>
 
-<div class="rail" id="rail"></div>
-
+<div class="layout">
+<div class="main-col">
 <div class="stage">
   <div class="stepttl" id="sttl"></div>
   <p class="steplede" id="slede"></p>
+
+  <div class="stage-body">
+  <div class="controls-col">
+    <div class="rail" id="rail"></div>
+    <div class="nav">
+      <button class="ghost" id="back">&#8592; Back</button>
+      <button id="fwd">Next &#8594;</button>
+      <span class="hint">or use the arrow keys</span>
+    </div>
+  </div>
+  <div class="visual-col">
 
 <svg width="100%" viewBox="0 0 680 400" aria-label="Energy balance diagram">
 <defs>
@@ -111,25 +158,27 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
 <g id="sun" class="el">
 <line x1="118" y1="46" x2="118" y2="302" stroke="#eda100" stroke-width="2.5" marker-end="url(#ay)"/>
-<text x="128" y="80" fill="#7a4a0a" font-size="14" font-weight="600">240</text>
-<text x="128" y="96" fill="#7a4a0a" font-size="10.5">sunlight in</text>
+<text x="128" y="64" fill="#7a4a0a" font-size="13" font-weight="600">340 W/m&#178;</text>
+<text x="128" y="78" fill="#7a4a0a" font-size="10" opacity=".85">arriving (S&#8320;&#8725;4)</text>
+<text x="128" y="286" fill="#7a4a0a" font-size="14" font-weight="600">240 W/m&#178;</text>
+<text x="128" y="300" fill="#7a4a0a" font-size="10.5">absorbed &#8212; 30% reflected</text>
 </g>
 
 <g id="bare" class="el">
 <line x1="250" y1="302" x2="250" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
-<text x="260" y="80" fill="#9e2d20" font-size="14" font-weight="600">240</text>
+<text x="260" y="80" fill="#9e2d20" font-size="14" font-weight="600">240 W/m&#178;</text>
 <text x="260" y="96" fill="#9e2d20" font-size="10.5">surface &#8594; space</text>
 </g>
 
 <g id="atmup" class="el">
 <line x1="360" y1="156" x2="360" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
-<text x="370" y="80" fill="#9e2d20" font-size="14" font-weight="600">240</text>
+<text x="370" y="80" fill="#9e2d20" font-size="14" font-weight="600">240 W/m&#178;</text>
 <text x="370" y="96" fill="#9e2d20" font-size="10.5">layer &#8594; space</text>
 </g>
 
 <g id="hiup" class="el">
 <line x1="360" y1="98" x2="360" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
-<text id="outv" x="370" y="76" fill="#9e2d20" font-size="14" font-weight="600">236</text>
+<text id="outv" x="370" y="76" fill="#9e2d20" font-size="14" font-weight="600">236 W/m&#178;</text>
 <text id="outl" x="370" y="92" fill="#9e2d20" font-size="10.5">out to space</text>
 </g>
 
@@ -141,7 +190,7 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
 <g id="down" class="el">
 <line x1="600" y1="220" x2="600" y2="302" stroke="#c25a1e" stroke-width="2.5" marker-end="url(#ao)"/>
-<text id="bkv" x="590" y="252" fill="#8f3f11" font-size="14" font-weight="600" text-anchor="end">240</text>
+<text id="bkv" x="590" y="252" fill="#8f3f11" font-size="14" font-weight="600" text-anchor="end">240 W/m&#178;</text>
 <text x="590" y="268" fill="#8f3f11" font-size="10.5" text-anchor="end">back radiation</text>
 </g>
 
@@ -151,16 +200,16 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
 <g id="win" class="el">
 <line x1="470" y1="302" x2="470" y2="46" stroke="#d3402f" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar)"/>
-<text x="478" y="80" fill="#9e2d20" font-size="13" font-weight="600">40</text>
+<text x="478" y="80" fill="#9e2d20" font-size="13" font-weight="600">40 W/m&#178;</text>
 <text x="478" y="96" fill="#9e2d20" font-size="10.5">through the window</text>
 </g>
 
 <g id="conv" class="el">
 <line x1="180" y1="302" x2="180" y2="220" stroke="#0f8a7a" stroke-width="2.5" marker-end="url(#at)"/>
-<text x="190" y="252" fill="#0a6154" font-size="13" font-weight="600">80</text>
+<text x="190" y="252" fill="#0a6154" font-size="13" font-weight="600">80 W/m&#178;</text>
 <text x="190" y="268" fill="#0a6154" font-size="10.5">evaporation</text>
 <line x1="286" y1="302" x2="286" y2="220" stroke="#0f8a7a" stroke-width="2.5" marker-end="url(#at)"/>
-<text x="296" y="252" fill="#0a6154" font-size="13" font-weight="600">20</text>
+<text x="296" y="252" fill="#0a6154" font-size="13" font-weight="600">20 W/m&#178;</text>
 <text x="296" y="268" fill="#0a6154" font-size="10.5">convection</text>
 </g>
 
@@ -172,13 +221,22 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
   <div class="board" id="board"></div>
 
-  <div class="nav">
-    <button class="ghost" id="back">&#8592; Back</button>
-    <button id="fwd">Next &#8594;</button>
-    <span class="hint">or use the arrow keys</span>
+  <div class="forcing-picker" id="fpick" hidden>
+    <div class="fp-row" id="fpBtns"></div>
+    <div class="fp-co2" id="fpCo2" hidden>
+      <label>CO&#8322; concentration <span class="val" id="vCO2">420 ppm</span></label>
+      <input type="range" id="rCO2" min="280" max="1000" step="5" value="420">
+      <p class="fp-co2-note">280 ppm was the pre-industrial level; today is around 420 ppm; 560 ppm is a doubling; 800&ndash;1000 ppm is roughly where an unchecked high-emissions path (SSP5-8.5) lands by 2100.</p>
+    </div>
+    <p class="fp-out" id="fpOut"></p>
+  </div>
+
+  </div>
   </div>
 </div>
+</div>
 
+<aside class="side-col">
 <h2>Try it yourself</h2>
 <div class="panel">
 <div class="grid">
@@ -198,6 +256,9 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
   <div><span class="k">surface temperature T&#8347;</span><span class="v" id="oTs"></span></div>
 </div>
 <p class="note" id="cmp"></p>
+</div>
+</aside>
+
 </div>
 
 <h2>Notes</h2>
@@ -332,8 +393,66 @@ var STEPS=[
     "@T\u209B = 289 K",
     "#feedbacks \u2014 water vapour, ice, cloud \u2014 roughly triple this",
     "&nbsp;",
-    "@the top returns to 240. The surface does not return."]}
+    "@the top returns to 240. The surface does not return."]},
+
+{t:"8 · Radiative forcing",
+ d:"Same imbalance, different causes. Pick a driver below.",
+ on:["sun","lay","hi","hiup","surfup","down","win","conv","gap"],
+ ta:"Tₐ = 255 K", ts:"Tₛ = 289 K", dash:0, out:"236", outl:"out to space", bk:"244",
+ forcing:1,
+ L:["forcing = any sustained imbalance at the top of the atmosphere, in W/m²",
+    "#caused by anything that changes the energy budget — not only CO₂",
+    "&nbsp;",
+    "ΔT = forcing ÷ climate feedback parameter",
+    "@Planck response alone: ≈ 3.8 W/m² per K",
+    "#feedbacks — water vapour, ice, cloud — cut that to roughly a third",
+    "&nbsp;",
+    "@same 3.7 W/m² from step 6 is just one entry in the list below",
+    "#last option lets you dial CO₂ itself, from pre-industrial to a high-emissions future"]}
 ];
+
+var FORCINGS=[
+ {n:"CO₂ doubling", F:3.7},
+ {n:"Net anthropogenic today", F:2.72},
+ {n:"Pinatubo eruption (1991, peak)", F:-3.0},
+ {n:"11-year solar cycle", F:0.1},
+ {n:"CO₂ concentration (ppm)", co2:true}
+];
+var fpi=0;
+
+var fpBtns=document.getElementById("fpBtns");
+FORCINGS.forEach(function(f,i){
+  var b=document.createElement("button");
+  b.textContent=f.co2 ? f.n : f.n+" ("+(f.F>=0?"+":"")+f.F+")";
+  b.onclick=function(){fpi=i;updateFpBtns();fcalc();};
+  fpBtns.appendChild(b);
+});
+function updateFpBtns(){
+  var bs=fpBtns.children;
+  for(var i=0;i<bs.length;i++)bs[i].classList.toggle("on",i===fpi);
+  document.getElementById("fpCo2").hidden=!FORCINGS[fpi].co2;
+}
+document.getElementById("rCO2").oninput=fcalc;
+function fcalc(){
+  var Te=255, f=FORCINGS[fpi], F;
+  if(f.co2){
+    var ppm=+document.getElementById("rCO2").value;
+    document.getElementById("vCO2").textContent=ppm+" ppm";
+    F=5.35*Math.log(ppm/280);
+  } else {
+    F=f.F;
+  }
+  var dtNo=F/(4*SIG*Math.pow(Te,3));
+  var dtFb=dtNo*3;
+  var sign=F>=0?"warms":"cools";
+  var why=f.co2?" — from CO₂ alone, via ΔF = 5.35 × ln(C/280 ppm)":"";
+  document.getElementById("fpOut").innerHTML="<b>"+F.toFixed(2)+" W/m²</b> imbalance"+why+" → "+sign+
+    " the surface by <b>"+Math.abs(dtNo).toFixed(2)+" K</b> (Planck response alone), or <b>"+
+    Math.abs(dtFb).toFixed(2)+" K</b> once feedbacks roughly triple it.";
+  var label=f.co2?f.n+" ("+ppm+" ppm)":f.n;
+  document.getElementById("gapt").textContent=(F>=0?"+":"")+F.toFixed(2)+" W/m² imbalance — "+label;
+  document.querySelector("#gap rect").setAttribute("fill",F>=0?"#b3402f":"#185fa5");
+}
 
 var IDS=["sun","bare","lay","hi","atmup","hiup","surfup","down","box","win","conv","gap"];
 var si=0, li=0;
@@ -353,12 +472,15 @@ function draw(){
   document.getElementById("ta").textContent=s.ta;
   document.getElementById("ts").textContent=s.ts;
   document.getElementById("dash").setAttribute("stroke-dasharray",s.dash?"5 4":"2 6");
-  if(s.out){document.getElementById("outv").textContent=s.out;
+  if(s.out){document.getElementById("outv").textContent=s.out+" W/m²";
             document.getElementById("outl").textContent=s.outl;}
-  document.getElementById("bkv").textContent=s.bk||"240";
+  document.getElementById("bkv").textContent=(s.bk||"240")+" W/m²";
+  document.querySelector("#gap rect").setAttribute("fill","#b3402f");
   if(s.gap)document.getElementById("gapt").textContent=s.gap;
   document.getElementById("sttl").textContent=s.t;
   document.getElementById("slede").textContent=s.d;
+  document.getElementById("fpick").hidden=!s.forcing;
+  if(s.forcing){fpi=0;updateFpBtns();fcalc();}
 
   var h="";
   for(i=0;i<s.L.length;i++){
