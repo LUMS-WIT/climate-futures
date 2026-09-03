@@ -171,7 +171,7 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #eee;font-size:13px
 
 <g id="atmup" class="el">
 <line x1="360" y1="156" x2="360" y2="46" stroke="#d3402f" stroke-width="2.5" marker-end="url(#ar)"/>
-<text x="370" y="80" fill="#9e2d20" font-size="14" font-weight="600">240 W/m&#178;</text>
+<text id="atmv" x="370" y="80" fill="#9e2d20" font-size="14" font-weight="600">240 W/m&#178;</text>
 <text x="370" y="96" fill="#9e2d20" font-size="10.5">layer &#8594; space</text>
 </g>
 
@@ -357,11 +357,14 @@ var STEPS=[
 
 {t:"5 \u00b7 Reality",
  d:"The model overshoots by 15 K. Three named failures.",
- on:["sun","lay","atmup","surfup","down","win","conv"], ta:"T\u2090 = 255 K", ts:"T\u209B = 288 K", dash:0,
+ on:["sun","lay","atmup","surfup","down","win","conv"], ta:"T\u2090 = 255 K", ts:"T\u209B = 288 K", dash:0, atm:"200",
  L:["the window   ~40 W/m\u00b2 leaves the surface directly (8\u201312 \u00b5m)",
     "evaporation  ~80 W/m\u00b2 carried up as latent heat",
     "convection   ~20 W/m\u00b2 carried up by rising air",
     "#and the real atmosphere absorbs ~78 W/m\u00b2 of sunlight on the way down",
+    "&nbsp;",
+    "the 240 leaving still splits two ways: 40 through the window",
+    "@+ 200 via the layer above \u2014 same total, not extra",
     "&nbsp;",
     "@three exits instead of one \u2192 303 K falls to 288 K",
     "#more ways out means the surface need not be as hot"]},
@@ -369,21 +372,21 @@ var STEPS=[
 {t:"6 \u00b7 Add CO\u2082",
  d:"The instant after. Nothing has had time to warm yet.",
  on:["sun","lay","hi","hiup","surfup","down","win","conv","gap"],
- ta:"T\u2090 = 255 K", ts:"T\u209B = 288 K", dash:0, out:"236", outl:"out to space \u2014 less than before", bk:"244",
+ ta:"T\u2090 = 255 K", ts:"T\u209B = 288 K", dash:0, out:"196", outl:"layer's share \u2014 less than before", bk:"244",
  gap:"240 in \u2212 236 out = +3.7 W/m\u00b2 piling up",
  L:["more absorber \u2192 infrared is caught higher up",
     "the last emission before space now happens where it is colder",
     "colder emitter \u2192 emits less",
     "&nbsp;",
     "in:  240      unchanged \u2014 the Sun did nothing",
-    "out: 236",
+    "out: 236      = 40 through the window (unchanged) + 196 via the layer",
     "@imbalance = +3.7 W/m\u00b2",
     "#nothing removes it. Over 90% ends up in the ocean."]},
 
 {t:"7 \u00b7 The new balance",
  d:"Decades later. Where does it settle?",
  on:["sun","lay","hi","hiup","surfup","down","win","conv","gap"],
- ta:"T\u2090 = 255 K", ts:"T\u209B = 289 K", dash:0, out:"240", outl:"out to space \u2014 restored", bk:"248",
+ ta:"T\u2090 = 255 K", ts:"T\u209B = 289 K", dash:0, out:"200", outl:"layer's share \u2014 restored", bk:"248",
  gap:"240 in \u2212 240 out = balanced again, but warmer",
  L:["warm until \u03c3T\u2074 pushes 240 back out",
     "&nbsp;",
@@ -397,7 +400,7 @@ var STEPS=[
 {t:"8 · Radiative forcing",
  d:"Same imbalance, different causes. Pick a driver below.",
  on:["sun","lay","hi","hiup","surfup","down","win","conv","gap"],
- ta:"Tₐ = 255 K", ts:"Tₛ = 289 K", dash:0, out:"236", outl:"out to space", bk:"244",
+ ta:"Tₐ = 255 K", ts:"Tₛ = 289 K", dash:0, out:"196", outl:"layer's share", bk:"244",
  forcing:1,
  L:["forcing = any sustained imbalance at the top of the atmosphere, in W/m²",
     "#caused by anything that changes the energy budget — not only CO₂",
@@ -457,8 +460,8 @@ function fcalc(){
   var TsNew=288+dtNo;
   document.getElementById("ta").textContent="Tₐ = 255 K";
   document.getElementById("ts").textContent="Tₛ = "+TsNew.toFixed(0)+" K";
-  document.getElementById("outv").textContent="240 W/m²";
-  document.getElementById("outl").textContent="out to space — balanced";
+  document.getElementById("outv").textContent="200 W/m²";
+  document.getElementById("outl").textContent="layer's share — balanced";
   document.getElementById("bkv").textContent="240 W/m²";
 }
 
@@ -484,6 +487,7 @@ function draw(){
   document.getElementById("sunPct").textContent="absorbed — 30% reflected";
   document.getElementById("ta").textContent=s.ta;
   document.getElementById("ts").textContent=s.ts;
+  document.getElementById("atmv").textContent=(s.atm||"240")+" W/m²";
   document.getElementById("dash").setAttribute("stroke-dasharray",s.dash?"5 4":"2 6");
   if(s.out){document.getElementById("outv").textContent=s.out+" W/m²";
             document.getElementById("outl").textContent=s.outl;}
