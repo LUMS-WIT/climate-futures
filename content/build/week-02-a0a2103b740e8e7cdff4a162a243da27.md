@@ -8,6 +8,11 @@
 
 TBA
 
+## Further Reading
+
+- [Skeptical Science](https://skepticalscience.com/argument.php) — catalogs common climate-skeptic arguments alongside the peer-reviewed rebuttal for each, useful background for understanding why scientific consensus formed despite continued public contestation.
+- [Global Carbon Budget](https://www.globalcarbonproject.org/carbonbudget/) — the Global Carbon Project's annual accounting of global CO₂ emissions and sinks.
+
 ## Slides
 
 ### Lecture 2
