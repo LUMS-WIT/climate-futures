@@ -2,7 +2,7 @@
 
 Pre-class readings, lecture notes, and hands-on material for Climate Change Governance: Science, Data & Models (ENGG562/ENV462), organized by week. The course runs as a flipped classroom: complete the pre-class reading before each session, since class time is used for discussion, tool sessions, and case studies rather than lecture delivery.
 
-This section is separate from the course logistics pages — see [Schedule](../schedule.html) for the full week/module table, [Grading](../grading.html) for assessment and policy detail, and [Resources](../resources.html) for the full reading list.
+This section is separate from the course logistics page — see [Course Info](../course-info.html) for the full week/module table and assessment and policy detail, and [Readings & Tools](../resources.html) for the full reading list.
 
 ## Modules
 

@@ -145,6 +145,35 @@ main { flex: 1; }
   text-decoration: underline;
 }
 
+.subnav {
+  background: var(--row-alt);
+  border-bottom: 1px solid var(--border);
+}
+
+.subnav-inner {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 64px);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.subnav-inner a {
+  display: inline-block;
+  padding: 0.6rem 0;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.subnav-inner a:hover {
+  color: var(--accent);
+}
+
 .theme-toggle {
   background: none;
   border: none;
