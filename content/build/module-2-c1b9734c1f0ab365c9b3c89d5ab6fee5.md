@@ -14,7 +14,6 @@ This module examines the institutional and political processes through which cli
 
 Given near-universal agreement that climate change requires a response, what accounts for the persistent difficulty of coordinated international action?
 
-## Weeks
+## Lectures
 
-- [Week 4](../weeks/week-04.md)
-- [Week 5](../weeks/week-05.md)
+Lecture slides for this module will be posted here as it is taught.

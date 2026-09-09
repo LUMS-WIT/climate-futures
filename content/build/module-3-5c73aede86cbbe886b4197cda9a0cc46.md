@@ -14,8 +14,6 @@ This module covers the scenario-based tools used by researchers and governments 
 
 A model's output is only as reliable as its underlying assumptions — which assumptions in these models warrant the greatest scrutiny?
 
-## Weeks
+## Lectures
 
-- [Week 6](../weeks/week-06.md)
-- [Week 7](../weeks/week-07.md)
-- [Week 8](../weeks/week-08.md)
+Lecture slides for this module will be posted here as it is taught.
