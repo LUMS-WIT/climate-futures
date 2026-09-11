@@ -15,10 +15,6 @@ This module examines the energy, water, and agriculture sectors individually bef
 
 When a transition is introduced in one sector, how does that change propagate through the other two, and what does that imply for how a sectoral transition should be sequenced?
 
-## Weeks
+## Lectures
 
-- [Week 9](../weeks/week-09.md)
-- [Week 10](../weeks/week-10.md)
-- [Week 11](../weeks/week-11.md)
-- [Week 12](../weeks/week-12.md)
-- [Week 13](../weeks/week-13.md)
+Lecture slides for this module will be posted here as it is taught.
