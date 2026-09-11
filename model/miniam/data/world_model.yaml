@@ -1,0 +1,267 @@
+# Data for the 25-technology global reference energy system.
+#
+# Source: model/energy/energy_model_world.gms in
+# https://github.com/volker-krey/ntnu_iam_2024. Values transcribed as-is; no
+# invented numbers.
+#
+# Two quirks in the source, kept here rather than smoothed over, since a
+# reader comparing against the GAMS would otherwise read them as transcription
+# bugs:
+#   - fom.wind_ppl steps down to 20 in 2080 (half of every other year, 40) —
+#     present in the GAMS TABLE as given, hence the per-year form below.
+#   - cost_capacity carries an extra x1000 factor that simple_model.yaml does
+#     not (see loader.py) — the GAMS comment explains why: inv is $/kW and
+#     CAP_NEW is in PW here (petawatts), so x1000 brings the capacity-cost
+#     term to the same order of magnitude ($bn) as the vom term, which is
+#     $/MWh against ACT in PWh.
+#
+# Also worth knowing before reading this as "the" world model: there is no
+# CO2 cap by default (cum_emiss_up is unset in the base run — see loader.py's
+# `load_world(cum_emiss_up=...)` for the constrained scenario), and the
+# resource-potential technologies (hydro_pot, wind_pot, solar_pot) carry no
+# activity upper bound despite the name — the GAMS leaves their supply
+# effectively unlimited. Both are exactly what the source does; wiring in
+# real regional/resource limits is future work, not a bug here.
+
+technology:
+  - coal_extr
+  - gas_extr
+  - oil_extr
+  - nuclear_fuel
+  - bio_pot
+  - hydro_pot
+  - wind_pot
+  - solar_pot
+  - coal_ppl
+  - gas_ppl
+  - oil_ppl
+  - bio_ppl
+  - hydro_ppl
+  - wind_ppl
+  - solar_PV_ppl
+  - nuclear_ppl
+  - other_ppl
+  - coal_nele
+  - oil_nele
+  - gas_nele
+  - bio_nele
+  - solar_nele
+  - other_nele
+  - electricity_grid
+  - appliances
+
+year: [2020, 2030, 2040, 2050, 2060, 2070, 2080]
+period_length: 10.0
+
+energy: [coal, gas, oil, biomass, nuclear, hydro, wind, solar, electricity, nonelectric]
+level: [primary, secondary, final, useful]
+energy_level:
+  - [hydro, primary]
+  - [wind, primary]
+  - [nuclear, primary]
+  - [coal, final]
+  - [oil, final]
+  - [gas, final]
+  - [biomass, final]
+  - [solar, final]
+  - [electricity, secondary]
+  - [electricity, final]
+  - [electricity, useful]
+  - [nonelectric, useful]
+
+input:
+  - {technology: electricity_grid, energy: electricity, level: secondary, value: 1.0}
+  - {technology: appliances, energy: electricity, level: final, value: 1.0}
+  - {technology: coal_ppl, energy: coal, level: final, value: 2.9}
+  - {technology: gas_ppl, energy: gas, level: final, value: 2.3}
+  - {technology: oil_ppl, energy: oil, level: final, value: 2.88}
+  - {technology: bio_ppl, energy: biomass, level: final, value: 3.59}
+  - {technology: nuclear_ppl, energy: nuclear, level: primary, value: 1.0}
+  - {technology: hydro_ppl, energy: hydro, level: primary, value: 1.0}
+  - {technology: wind_ppl, energy: wind, level: primary, value: 1.0}
+  - {technology: solar_PV_ppl, energy: solar, level: final, value: 1.0}
+  - {technology: coal_nele, energy: coal, level: final, value: 1.0}
+  - {technology: oil_nele, energy: oil, level: final, value: 1.0}
+  - {technology: gas_nele, energy: gas, level: final, value: 1.0}
+  - {technology: bio_nele, energy: biomass, level: final, value: 1.0}
+  - {technology: solar_nele, energy: solar, level: final, value: 1.0}
+
+output:
+  - {technology: electricity_grid, energy: electricity, level: final, value: 0.842}
+  - {technology: appliances, energy: electricity, level: useful, value: 1.0}
+  - {technology: coal_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: gas_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: oil_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: bio_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: hydro_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: wind_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: solar_PV_ppl, energy: electricity, level: final, value: 1.0}
+  - {technology: nuclear_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: other_ppl, energy: electricity, level: secondary, value: 1.0}
+  - {technology: coal_nele, energy: nonelectric, level: useful, value: 1.0}
+  - {technology: oil_nele, energy: nonelectric, level: useful, value: 1.0}
+  - {technology: gas_nele, energy: nonelectric, level: useful, value: 1.0}
+  - {technology: bio_nele, energy: nonelectric, level: useful, value: 1.0}
+  - {technology: solar_nele, energy: nonelectric, level: useful, value: 1.0}
+  - {technology: other_nele, energy: nonelectric, level: useful, value: 1.0}
+  - {technology: coal_extr, energy: coal, level: final, value: 1.0}
+  - {technology: gas_extr, energy: gas, level: final, value: 1.0}
+  - {technology: oil_extr, energy: oil, level: final, value: 1.0}
+  - {technology: nuclear_fuel, energy: nuclear, level: primary, value: 1.0}
+  - {technology: bio_pot, energy: biomass, level: final, value: 1.0}
+  - {technology: hydro_pot, energy: hydro, level: primary, value: 1.0}
+  - {technology: wind_pot, energy: wind, level: primary, value: 1.0}
+  - {technology: solar_pot, energy: solar, level: final, value: 1.0}
+
+co2_emission:
+  gas_ppl: 0.367
+  coal_ppl: 0.854
+  oil_ppl: 0.57
+  coal_nele: 0.342
+  oil_nele: 0.202
+  gas_nele: 0.26
+
+diffusion_up:
+  coal_ppl: 0.075
+  gas_ppl: 0.10
+  oil_ppl: 0.075
+  bio_ppl: 0.075
+  hydro_ppl: 0.05
+  wind_ppl: 0.10
+  solar_PV_ppl: 0.15
+  nuclear_ppl: 0.05
+  other_ppl: 0.075
+  coal_nele: 0.075
+  oil_nele: 0.075
+  gas_nele: 0.10
+  bio_nele: 0.075
+  solar_nele: 0.15
+  other_nele: 0.075
+  coal_extr: 0.05
+  gas_extr: 0.05
+  oil_extr: 0.05
+  nuclear_fuel: 0.05
+  bio_pot: 0.05
+# startup applies a constant 1.0 to every technology listed in diffusion_up
+# above (GAMS: same technology set, all entries = 1) — loader.py derives this
+# rather than repeating the list.
+startup_value: 1.0
+
+demand_base:
+  - {energy: electricity, level: useful, value: 22.60}
+  - {energy: nonelectric, level: useful, value: 87.3}
+gdp:
+  2020: 1.0
+  2030: 1.2
+  2040: 1.4
+  2050: 1.7
+  2060: 2.0
+  2070: 2.4
+  2080: 2.9
+gdp_beta: 0.7
+discount_rate: 0.05
+
+share_up:
+  coal_nonelectric: 0.4
+share_lo:
+  coal_nonelectric: 0.0
+tec_share:
+  coal_nonelectric: [coal_nele]
+tec_share_rhs:
+  coal_nonelectric: [coal_nele, gas_nele, oil_nele, bio_nele, solar_nele, other_nele]
+
+inv:
+  coal_ppl: 1500.0
+  gas_ppl: 800.0
+  oil_ppl: 950.0
+  hydro_ppl: 3000.0
+  bio_ppl: 1600.0
+  wind_ppl: 1000.0
+  solar_PV_ppl: 4000.0
+  nuclear_ppl: 6000.0
+  other_ppl: 4000.0
+
+fom:
+  coal_ppl: 40.0
+  gas_ppl: 25.0
+  oil_ppl: 25.0
+  bio_ppl: 60.0
+  hydro_ppl: 30.0
+  wind_ppl: {2020: 40.0, 2030: 40.0, 2040: 40.0, 2050: 40.0, 2060: 40.0, 2070: 40.0, 2080: 20.0}
+  solar_PV_ppl: 25.0
+  nuclear_ppl: 100.0
+  other_ppl: 25.0
+
+vom:
+  coal_ppl: 0.0
+  gas_ppl: 0.0
+  oil_ppl: 0.0
+  bio_ppl: 0.0
+  nuclear_ppl: 0.0
+  electricity_grid: 47.8
+  coal_nele: 0.0
+  gas_nele: 0.0
+  oil_nele: 0.0
+  bio_nele: 0.0
+  solar_nele: 0.0
+  other_nele: 0.0
+  coal_extr: 7.2
+  gas_extr: 14.4
+  oil_extr: 40.0
+  nuclear_fuel: 10.0
+  bio_pot: 18.0
+  hydro_pot: 0.0
+  wind_pot: 0.0
+  solar_pot: 0.0
+
+lifetime:
+  coal_ppl: 30.0
+  gas_ppl: 20.0
+  oil_ppl: 20.0
+  bio_ppl: 20.0
+  hydro_ppl: 80.0
+  wind_ppl: 20.0
+  solar_PV_ppl: 20.0
+  nuclear_ppl: 40.0
+  other_ppl: 20.0
+  coal_nele: 20.0
+  oil_nele: 20.0
+  gas_nele: 20.0
+  bio_nele: 20.0
+  solar_nele: 20.0
+  other_nele: 20.0
+
+hours:
+  coal_ppl: 7000.0
+  gas_ppl: 6000.0
+  oil_ppl: 6000.0
+  bio_ppl: 6000.0
+  hydro_ppl: 4500.0
+  wind_ppl: 2000.0
+  solar_PV_ppl: 1200.0
+  nuclear_ppl: 7500.0
+  other_ppl: 4000.0
+  coal_nele: 7000.0
+  oil_nele: 7000.0
+  gas_nele: 7000.0
+  bio_nele: 7000.0
+  solar_nele: 7000.0
+  other_nele: 7000.0
+
+act_fx:
+  - {technology: coal_ppl, year: 2020, value: 9.462}
+  - {technology: oil_ppl, year: 2020, value: 0.7}
+  - {technology: solar_PV_ppl, year: 2020, value: 0.839}
+  - {technology: gas_ppl, year: 2020, value: 6.36}
+  - {technology: nuclear_ppl, year: 2020, value: 2.68}
+  - {technology: hydro_ppl, year: 2020, value: 4.36}
+  - {technology: wind_ppl, year: 2020, value: 1.6}
+  - {technology: bio_ppl, year: 2020, value: 0.69}
+  - {technology: coal_nele, year: 2020, value: 10.7}
+  - {technology: oil_nele, year: 2020, value: 43.0}
+  - {technology: gas_nele, year: 2020, value: 18.7}
+  - {technology: bio_nele, year: 2020, value: 10.6}
+
+act_lo:
+  - {technology: other_ppl, year: 2020, value: 0.127}
+  - {technology: other_nele, year: 2020, value: 0.28}

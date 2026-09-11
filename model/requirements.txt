@@ -1,0 +1,6 @@
+linopy
+highspy
+pandas
+numpy
+pyyaml
+pytest

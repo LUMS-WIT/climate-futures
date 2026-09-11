@@ -1,0 +1,84 @@
+# Data for the 3-technology, 2-period toy energy model.
+#
+# Source: model/energy/simple_model.gms in
+# https://github.com/volker-krey/ntnu_iam_2024. Values transcribed as-is,
+# only reshaped into the general (energy, level) commodity form that
+# loader.py / core.formulation expects. The GAMS original has no explicit
+# commodity: technologies compete directly against a flat demand(year).
+# Represented here as one commodity, "power" at level "useful", with 1:1
+# technology output and no input.
+#
+# Acceptance check: solves, and the coal_power share constraint binds at
+# exactly 0.4.
+
+technology: [coal_ppl, gas_ppl, wind_ppl]
+year: [2020, 2030]
+period_length: 10.0
+
+energy: [power]
+level: [useful]
+energy_level:
+  - [power, useful]
+
+output:
+  - {technology: coal_ppl, energy: power, level: useful, value: 1.0}
+  - {technology: gas_ppl, energy: power, level: useful, value: 1.0}
+  - {technology: wind_ppl, energy: power, level: useful, value: 1.0}
+input: []
+
+demand_by_year:
+  - {energy: power, level: useful, year: 2020, value: 100.0}
+  - {energy: power, level: useful, year: 2030, value: 120.0}
+
+discount_rate: 0.05
+
+inv:
+  coal_ppl: 1500.0
+  gas_ppl: 800.0
+  wind_ppl: 1000.0
+
+fom:
+  coal_ppl: 60.0
+  gas_ppl: 32.0
+  wind_ppl: 40.0
+
+vom:
+  coal_ppl: 0.018
+  gas_ppl: 0.036
+  wind_ppl: 0.0
+
+co2_emission:
+  coal_ppl: 846.0
+  gas_ppl: 367.0
+  wind_ppl: 0.0
+
+hours:
+  coal_ppl: 7000.0
+  gas_ppl: 7000.0
+  wind_ppl: 2000.0
+
+lifetime:
+  coal_ppl: 30.0
+  gas_ppl: 30.0
+  wind_ppl: 30.0
+
+diffusion_up:
+  coal_ppl: 0.05
+  gas_ppl: 0.05
+  wind_ppl: 0.05
+
+startup:
+  coal_ppl: 0.001
+  gas_ppl: 0.001
+  wind_ppl: 0.001
+
+share_up:
+  coal_power: 0.4
+share_lo: {}
+tec_share:
+  coal_power: [coal_ppl]
+tec_share_rhs:
+  coal_power: [coal_ppl, gas_ppl, wind_ppl]
+
+act_fx: []
+act_lo: []
