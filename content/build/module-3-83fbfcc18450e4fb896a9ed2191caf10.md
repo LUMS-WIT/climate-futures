@@ -1,6 +1,6 @@
-# Module 2: Policy Landscape
+# Module 3: Policy Landscape
 
-**Weeks 4–5**
+**Weeks 7–8** (midterm exam at end of Week 8)
 
 This module examines the institutional and political processes through which climate policy is formulated and implemented at the international and national levels.
 

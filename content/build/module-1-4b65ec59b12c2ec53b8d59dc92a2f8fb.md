@@ -40,6 +40,12 @@ What evidence distinguishes anthropogenic warming from natural climate variabili
 
 [Download slides (PDF)](/slides/lecture-04-radiative-forcing-and-feedbacks.pdf)
 
+### Lecture 5: Global Circulation Models (GCMs) and Earth System Models (ESMs)
+
+<iframe src="/climate-futures/content/slides/lecture-05-global-circulation-and-earth-system-models.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
+
+[Download slides (PDF)](/slides/lecture-05-global-circulation-and-earth-system-models.pdf)
+
 ## Interactive Tools
 
 ### The Greenhouse Effect
