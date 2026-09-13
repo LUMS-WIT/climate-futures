@@ -7,8 +7,8 @@ This section is separate from the course logistics page — see [Course Info](..
 ## Modules
 
 - [Module 1: Climate Science Foundations](modules/module-1.md) — Weeks 1–3
-- [Module 2: Policy Landscape](modules/module-2.md) — Weeks 4–5
-- [Module 3: Scenarios & Integrated Assessment](modules/module-3.md) — Weeks 6–8
+- [Module 2: Scenarios & Integrated Assessment](modules/module-2.md) — Weeks 4–6
+- [Module 3: Policy Landscape](modules/module-3.md) — Weeks 7–8
 - [Module 4: Energy–Water–Agriculture Nexus](modules/module-4.md) — Weeks 9–13
 - [Capstone — Project Presentations and Defense](weeks/week-14.md) — Week 14
 

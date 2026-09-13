@@ -1,18 +1,18 @@
-# Module 3: Scenarios & Integrated Assessment
+# Module 3: Policy Landscape
 
-**Weeks 6–8** (midterm exam at end of Week 8)
+**Weeks 7–8** (midterm exam at end of Week 8)
 
-This module covers the scenario-based tools used by researchers and governments to evaluate policy before implementation, including their methodological limitations.
+This module examines the institutional and political processes through which climate policy is formulated and implemented at the international and national levels.
 
 ## Learning Objectives
 
-- Explain the function of an SSP narrative and the rationale for using scenario families rather than single forecasts.
-- Use an integrated assessment model to trace the outcome of a mitigation pathway.
-- Connect carbon-pricing and fiscal mechanisms to national policy case studies.
+- Describe the role of energy, water, and land use (AFOLU) in the structure of the modern economy.
+- Explain the structure of the UNFCCC, the Paris Agreement, and Nationally Determined Contributions.
+- Assess the function of the Enhanced Transparency Framework in holding countries to their commitments.
 
 ## Guiding Question
 
-A model's output is only as reliable as its underlying assumptions — which assumptions in these models warrant the greatest scrutiny?
+Given near-universal agreement that climate change requires a response, what accounts for the persistent difficulty of coordinated international action?
 
 ## Lectures
 
