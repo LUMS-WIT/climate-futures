@@ -16,31 +16,56 @@ What evidence distinguishes anthropogenic warming from natural climate variabili
 
 ## Lectures
 
+(lec1)=
 ### Lecture 1: Introduction
+
+Course framing, using the World Economic Forum's Global Risk Perception Survey to place climate change among the top long-term risks to humanity.
+
+Permalink: [/content/module-1/#lec1](https://lums-wit.github.io/climate-futures/content/module-1/#lec1)
 
 <iframe src="/climate-futures/content/slides/lecture-01-introduction.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
 
 [Download slides (PDF)](/slides/lecture-01-introduction.pdf)
 
+(lec2)=
 ### Lecture 2: Radiations and Greenhouse Gases
+
+Earth's energy, water, and carbon budgets represented as a box-and-arrow system, and the radiative role of greenhouse gases within it.
+
+Permalink: [/content/module-1/#lec2](https://lums-wit.github.io/climate-futures/content/module-1/#lec2)
 
 <iframe src="/climate-futures/content/slides/lecture-02-radiations-and-greenhouse-gases.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
 
 [Download slides (PDF)](/slides/lecture-02-radiations-and-greenhouse-gases.pdf)
 
+(lec3)=
 ### Lecture 3: Observations
+
+A radiative-forcing recap followed by the observational temperature and greenhouse-gas records used to detect and attribute climate change.
+
+Permalink: [/content/module-1/#lec3](https://lums-wit.github.io/climate-futures/content/module-1/#lec3)
 
 <iframe src="/climate-futures/content/slides/lecture-03-observations.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
 
 [Download slides (PDF)](/slides/lecture-03-observations.pdf)
 
+(lec4)=
 ### Lecture 4: Radiative Forcing and Feedbacks
+
+The IPCC definition of radiative forcing, its sign convention, and the feedback mechanisms that amplify or dampen an initial forcing.
+
+Permalink: [/content/module-1/#lec4](https://lums-wit.github.io/climate-futures/content/module-1/#lec4)
 
 <iframe src="/climate-futures/content/slides/lecture-04-radiative-forcing-and-feedbacks.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
 
 [Download slides (PDF)](/slides/lecture-04-radiative-forcing-and-feedbacks.pdf)
 
+(lec5)=
 ### Lecture 5: Global Circulation Models (GCMs) and Earth System Models (ESMs)
+
+What a climate model is, and how General Circulation Models and Earth System Models represent the climate system from physical, chemical, and biological first principles.
+
+Permalink: [/content/module-1/#lec5](https://lums-wit.github.io/climate-futures/content/module-1/#lec5)
 
 <iframe src="/climate-futures/content/slides/lecture-05-global-circulation-and-earth-system-models.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
 
