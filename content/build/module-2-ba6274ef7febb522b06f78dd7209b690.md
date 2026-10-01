@@ -49,4 +49,26 @@ Permalink: [/content/module-2/#lec8](https://lums-wit.github.io/climate-futures/
 
 [Download slides (PDF)](/slides/lecture-08-shared-socioeconomic-pathways.pdf)
 
+(lec9)=
+### Lecture 9: Introduction to Integrated Assessment Models (IAMs)
+
+The definition of integrated assessment and the two main families of integrated assessment models: highly aggregated cost-benefit models such as DICE, which are used to estimate the social cost of carbon, and detailed process-based models of the coupled human and Earth system. The lecture reviews the critique of aggregated models by Pindyck and the defence of the field by Weyant, compares process engineering, partial equilibrium, and general equilibrium approaches, and summarizes the strengths and limitations of these models. The second part introduces open and reproducible scientific programming, including the FAIR data principles and version control, as preparation for the modelling exercises in this course.
+
+Permalink: [/content/module-2/#lec9](https://lums-wit.github.io/climate-futures/content/module-2/#lec9)
+
+<iframe src="/climate-futures/content/slides/lecture-09-introduction-to-integrated-assessment-models.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
+
+[Download slides (PDF)](/slides/lecture-09-introduction-to-integrated-assessment-models.pdf)
+
+(lec10)=
+### Lecture 10: Energy System Transitions
+
+The central role of the energy system in integrated assessment models and in global greenhouse gas emissions. The lecture covers the chain from primary to secondary to final energy, the methods used to account for primary energy from non-fossil sources, and refreshers on energy units, the Paris Agreement targets, and emitting, low-carbon, and negative-emission technologies. It then examines what IPCC AR6 mitigation scenarios imply for the energy system, including the scale-up of low-carbon supply, the electrification of end uses, shifts in investment, and the risk of stranded fossil assets.
+
+Permalink: [/content/module-2/#lec10](https://lums-wit.github.io/climate-futures/content/module-2/#lec10)
+
+<iframe src="/climate-futures/content/slides/lecture-10-energy-system-transitions.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
+
+[Download slides (PDF)](/slides/lecture-10-energy-system-transitions.pdf)
+
 More lecture slides for this module will be posted here as it is taught.
