@@ -4,3 +4,6 @@ content-src/node_modules
 CLAUDE.md
 ENGG-562-ENGG462-Climate Change Governance_outline_students_v1.docx
 /references
+content-src/slides/~$lecture_09_introduction_to_IAMs.pptx
+# Trainer copies of coding notebooks (solutions) and their build scripts: private, never push
+content-src/coding/trainer/
