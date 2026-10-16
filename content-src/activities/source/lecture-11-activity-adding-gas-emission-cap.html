@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Adding Gas and an Emission Cap</title><link rel="stylesheet" href="worksheet.css"></head>
+<body>
+<div class="course">ENGG562/ENV462 · Climate Change Governance: Science, Data &amp; Models · LUMS · Fall 2026 · Lecture 11 in-class activity</div>
+<h1>Adding Gas and an Emission Cap: Solving a Power System by Hand</h1>
+<div class="namebox"><span>Names:</span><span>Roll numbers:</span></div>
+<p class="note">Work in pairs. Time: about 30 minutes. Only a calculator is needed. Round final answers to two decimal places and show the working in the boxes.</p>
+
+<h2>The system</h2>
+<p>Westeros must supply 50 GWa of electricity. It has three power plants. Gas is new: it costs more to run than coal but emits less than half as much CO₂ per unit of electricity. The data are illustrative teaching values.</p>
+<table>
+<tr><th>Plant</th><th class="num">Running cost (USD/kWa)</th><th class="num">Maximum output (GWa)</th><th class="num">Emissions (t CO₂/kWa)</th></tr>
+<tr><td>Coal</td><td class="num">60</td><td class="num">45</td><td class="num">8.0</td></tr>
+<tr><td>Gas</td><td class="num">80</td><td class="num">50</td><td class="num">3.4</td></tr>
+<tr><td>Wind</td><td class="num">20</td><td class="num">30</td><td class="num">0</td></tr>
+</table>
+<p><strong>Useful facts.</strong> Output (GWa) × running cost (USD/kWa) = cost in million USD. Output (GWa) × emission factor (t CO₂/kWa) = emissions in Mt CO₂. Write <i>x</i><sub>c</sub>, <i>x</i><sub>g</sub> and <i>x</i><sub>w</sub> for the output of coal, gas and wind in GWa.</p>
+
+<h2>Part A. No climate policy</h2>
+<p><strong>A1.</strong> Rank the three plants from cheapest to most expensive to run. This ranking is called the merit order.</p>
+<div class="ans s"></div>
+<p><strong>A2.</strong> Meet demand at the lowest possible cost with no emission limit. Fill in the table.</p>
+<table>
+<tr><th></th><th class="num">Output (GWa)</th><th class="num">Cost (million USD)</th><th class="num">Emissions (Mt CO₂)</th></tr>
+<tr><td>Coal</td><td class="blank"></td><td></td><td></td></tr>
+<tr><td>Gas</td><td class="blank"></td><td></td><td></td></tr>
+<tr><td>Wind</td><td class="blank"></td><td></td><td></td></tr>
+<tr><td><strong>Total</strong></td><td class="blank"></td><td></td><td></td></tr>
+</table>
+<p><strong>A3.</strong> Why is gas not used at all in this solution?</p>
+<div class="ans s"></div>
+
+<div class="avoid">
+<h2>Part B. Adding an emission cap of 100 Mt CO₂</h2>
+<p>The government now limits total emissions:</p>
+<p class="eq">8.0 <i>x</i><sub>c</sub> + 3.4 <i>x</i><sub>g</sub> + 0 <i>x</i><sub>w</sub> ≤ 100 &nbsp;(Mt CO₂)</p>
+<p><strong>B1.</strong> Does the answer to A2 satisfy the cap? By how much does it exceed it?</p>
+<div class="ans s"></div>
+<p><strong>B2.</strong> Should wind still run at its maximum of 30 GWa? Explain in one sentence.</p>
+<div class="ans s"></div>
+<p><strong>B3.</strong> With wind at 30 GWa, how much demand is left for coal and gas together? Write this as an equation in <i>x</i><sub>c</sub> and <i>x</i><sub>g</sub>.</p>
+<div class="ans s"></div>
+</div>
+<p><strong>B4.</strong> Try two extreme options and fill in the table. Which one meets the cap?</p>
+<table>
+<tr><th>Option</th><th class="num">Coal (GWa)</th><th class="num">Gas (GWa)</th><th class="num">Emissions (Mt)</th><th class="num">Meets cap?</th><th class="num">Cost (million USD)</th></tr>
+<tr><td>All coal</td><td class="blank"></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>All gas</td><td class="blank"></td><td></td><td></td><td></td><td></td></tr>
+</table>
+<p><strong>B5.</strong> Coal is cheaper than gas, so the cheapest solution uses as much coal as the cap allows. Use the equation from B3 and the cap (with equality) to find <i>x</i><sub>c</sub> and <i>x</i><sub>g</sub>.</p>
+<div class="ans m"></div>
+<p><strong>B6.</strong> Calculate the total cost of this solution, including wind.</p>
+<div class="ans s"></div>
+<p><strong>B7.</strong> How much did the cap raise the total cost compared with A2?</p>
+<div class="ans s"></div>
+
+<div class="avoid">
+<h2>Part C. The carbon price by hand</h2>
+<p>The carbon price is the cost of reducing emissions by one more tonne, given that the cheapest options are already in use. In this system the only way to cut emissions further is to switch more output from coal to gas.</p>
+<p><strong>C1.</strong> Switching 1 kWa from coal to gas: how much extra does it cost (USD), and how many tonnes of CO₂ does it avoid?</p>
+<div class="ans s"></div>
+<p><strong>C2.</strong> What is the cost per tonne of CO₂ avoided? This is the carbon price.</p>
+<div class="ans s"></div>
+<p><strong>C3.</strong> Check the answer: tighten the cap to 99 Mt and repeat B5 and B6. By how much does the total cost rise?</p>
+<div class="ans m"></div>
+</div>
+
+<div class="avoid">
+<h2>Part D. The price of electricity</h2>
+<p><strong>D1.</strong> With the 100 Mt cap still in place, demand rises to 51 GWa. Wind is already at its maximum. Find the new <i>x</i><sub>c</sub>, <i>x</i><sub>g</sub> and total cost.</p>
+<div class="ans m"></div>
+<p><strong>D2.</strong> By how much did the cost rise for one extra GWa? This is the price of electricity in USD/kWa.</p>
+<div class="ans s"></div>
+<p><strong>D3.</strong> Show that this price equals the running cost of gas plus the carbon price times the emissions of gas.</p>
+<div class="ans s"></div>
+<p><strong>D4.</strong> Without the cap the electricity price was 60 USD/kWa (the cost of coal). Explain in one sentence why the cap raised it.</p>
+<div class="ans s"></div>
+</div>
+
+<div class="avoid">
+<h2>Part E. What if? (choose one, then discuss)</h2>
+<p><strong>E1. A carbon tax instead of a cap.</strong> Replace the cap with a tax of 10 USD per tonne. Add the tax to each plant’s running cost (tax × emission factor), find the new merit order and the cheapest dispatch. What are the emissions?</p>
+<p><strong>E2. A tax equal to the carbon price.</strong> Repeat E1 with a tax of 4.35 USD per tonne. What do you notice about coal and gas?</p>
+<p><strong>E3. A new zero-carbon option.</strong> Solar becomes available at 15 USD/kWa, up to 10 GWa, with zero emissions (the 100 Mt cap is restored). Find the cheapest dispatch, its emissions, and the carbon price.</p>
+<div class="ans l"></div>
+</div>
+
+<div class="avoid">
+<h2>Part F. Connect to MESSAGEix</h2>
+<p>Match each item from this worksheet to its MESSAGEix name. Choose from: ACT, var_cost, emission_factor, bound_emission, tax_emission, PRICE_EMISSION, PRICE_COMMODITY.</p>
+<table>
+<tr><th>Item in this worksheet</th><th>MESSAGEix name</th></tr>
+<tr><td><i>x</i><sub>c</sub>, <i>x</i><sub>g</sub>, <i>x</i><sub>w</sub>: output of each plant</td><td class="blank"></td></tr>
+<tr><td>Running cost (USD/kWa)</td><td class="blank"></td></tr>
+<tr><td>Emissions per kWa (8.0, 3.4, 0)</td><td class="blank"></td></tr>
+<tr><td>The 100 Mt cap</td><td class="blank"></td></tr>
+<tr><td>The tax in E1 and E2</td><td class="blank"></td></tr>
+<tr><td>Carbon price (C2)</td><td class="blank"></td></tr>
+<tr><td>Electricity price (D2)</td><td class="blank"></td></tr>
+</table>
+<p><strong>F1. Discussion.</strong> Name one reason a real power system might not switch from coal to gas the way this model does.</p>
+<div class="ans m"></div>
+</div>
+</body></html>

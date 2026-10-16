@@ -7,3 +7,6 @@ ENGG-562-ENGG462-Climate Change Governance_outline_students_v1.docx
 content-src/slides/~$lecture_09_introduction_to_IAMs.pptx
 # Trainer copies of coding notebooks (solutions) and their build scripts: private, never push
 content-src/coding/trainer/
+# Instructor originals of class activities (answer keys, student names): private, never push.
+# Student-facing PDFs are generated into content-src/activities/ instead.
+content-src/class_activity/

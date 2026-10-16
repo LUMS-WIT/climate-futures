@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Electrification in the AR6 Scenario Database</title><link rel="stylesheet" href="worksheet.css"></head>
+<body>
+<div class="course">ENGG562/ENV462 · Climate Change Governance: Science, Data &amp; Models · LUMS · Fall 2026 · Lecture 10 in-class activity</div>
+<h1>Electrification in the AR6 Scenario Database</h1>
+<div class="namebox"><span>Group:</span><span>Names:</span></div>
+<p class="note">Database: AR6 Scenario Explorer, <a href="https://data.ece.iiasa.ac.at/ar6/">https://data.ece.iiasa.ac.at/ar6/</a>. Each group computes one demand-side measure and one supply-side measure for its region across the scenarios listed below.</p>
+
+<h2>Group assignments</h2>
+<table>
+<tr><th class="num">Group</th><th>Region</th><th>Demand-side sector</th><th>Demand-side measure</th><th>Supply-side measure</th></tr>
+<tr><td class="num">1</td><td>R10NORTH_AM</td><td>Transport</td><td>Electricity share of transport energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">2</td><td>R10EUROPE</td><td>Transport</td><td>Electricity share of transport energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">3</td><td>R10INDIA+</td><td>Transport</td><td>Electricity share of transport energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">4</td><td>R10LATIN_AM</td><td>Transport</td><td>Electricity share of transport energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">5</td><td>R10PAC_OECD</td><td>Buildings</td><td>Electricity share of buildings energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">6</td><td>R10AFRICA</td><td>Buildings</td><td>Electricity share of buildings energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">7</td><td>R10REST_ASIA</td><td>Buildings</td><td>Electricity share of buildings energy</td><td>Renewable share of electricity</td></tr>
+<tr><td class="num">8</td><td>R10CHINA+</td><td>Industry</td><td>Electricity share of industry energy</td><td>Renewable share of electricity</td></tr>
+</table>
+
+<h2>Scenarios</h2>
+<table>
+<tr><th>Pathway</th><th>Category</th><th>Model</th><th>Scenario</th></tr>
+<tr><td>CurPol</td><td>C7 (approx.)</td><td>GCAM 5.3</td><td>NGFS2_Current Policies</td></tr>
+<tr><td>ModAct</td><td>C6 (approx.)</td><td>IMAGE 3.0</td><td>EN_INDCi2030_3000f</td></tr>
+<tr><td>IMP-GS</td><td>C3</td><td>WITCH 5.0</td><td>CO_Bridge</td></tr>
+<tr><td>IMP-Neg</td><td>C2</td><td>COFFEE 1.1</td><td>EN_NPi2020_400f_lowBECCS</td></tr>
+<tr><td>IMP-Ren</td><td>C1</td><td>REMIND-MAgPIE 2.1-4.3</td><td>DeepElec_SSP2_ HighRE_Budg900</td></tr>
+<tr><td>IMP-LD</td><td>C1</td><td>MESSAGEix-GLOBIOM 1.0</td><td>LowEnergyDemand_1.3_IPCC</td></tr>
+<tr><td>IMP-SP</td><td>C1</td><td>REMIND-MAgPIE 2.1-4.2</td><td>SusDev_SDP-PkBudg1000</td></tr>
+</table>
+
+<h2>Variables</h2>
+<p>Each share is the electricity variable divided by the total variable. For the supply-side measure, add solar, wind and hydro before dividing.</p>
+<table>
+<tr><th>Sector</th><th>Total</th><th>Electricity</th></tr>
+<tr><td>Transport</td><td>Final Energy|Transportation</td><td>Final Energy|Transportation|Electricity</td></tr>
+<tr><td>Buildings</td><td>Final Energy|Residential and Commercial</td><td>Final Energy|Residential and Commercial|Electricity</td></tr>
+<tr><td>Industry</td><td>Final Energy|Industry</td><td>Final Energy|Industry|Electricity</td></tr>
+<tr><td>Supply (all groups)</td><td>Secondary Energy|Electricity</td><td>Secondary Energy|Electricity|Solar, |Wind, |Hydro</td></tr>
+</table>
+
+<div class="avoid">
+<h2>Results</h2>
+<table>
+<tr><th>Pathway</th><th class="num">Demand-side share 2030</th><th class="num">Demand-side share 2050</th><th class="num">Renewable share 2030</th><th class="num">Renewable share 2050</th></tr>
+<tr><td>CurPol</td><td class="blank"></td><td></td><td></td><td></td></tr>
+<tr><td>ModAct</td><td class="blank"></td><td></td><td></td><td></td></tr>
+<tr><td>IMP-GS</td><td class="blank"></td><td></td><td></td><td></td></tr>
+<tr><td>IMP-Neg</td><td class="blank"></td><td></td><td></td><td></td></tr>
+<tr><td>IMP-Ren</td><td class="blank"></td><td></td><td></td><td></td></tr>
+<tr><td>IMP-LD</td><td class="blank"></td><td></td><td></td><td></td></tr>
+<tr><td>IMP-SP</td><td class="blank"></td><td></td><td></td><td></td></tr>
+</table>
+</div>
+</body></html>

@@ -1,0 +1,38 @@
+/* Shared print style for in-class worksheets. Build: see build.sh in this folder. */
+@page { size: A4; margin: 16mm 0 14mm 0; }
+* { box-sizing: border-box; }
+html, body { background: #ffffff; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0 18mm;
+}
+.course { font-size: 9pt; color: #666666; border-bottom: 1px solid #e0e0e0; padding-bottom: 4px; margin-bottom: 10px; }
+h1 { font-size: 16pt; margin: 0 0 4px 0; border-left: 4px solid #4d7e5e; padding-left: 10px; }
+h2 { font-size: 12pt; margin: 16px 0 6px 0; border-left: 4px solid #4d7e5e; padding-left: 8px; }
+h3 { font-size: 10.5pt; margin: 12px 0 4px 0; }
+p { margin: 4px 0 6px 0; }
+ul, ol { margin: 4px 0 6px 0; padding-left: 20px; }
+li { margin: 2px 0; }
+.meta { color: #666666; font-size: 9.5pt; margin-bottom: 8px; }
+.namebox { display: flex; gap: 16px; margin: 8px 0 12px 0; font-size: 9.5pt; }
+.namebox span { flex: 1; border-bottom: 1px solid #1a1a1a; padding-bottom: 14px; }
+.note { border-left: 4px solid #4d7e5e; background: #fafaf9; padding: 6px 10px; margin: 8px 0; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px 0; font-size: 9.5pt; }
+th, td { border: 1px solid #b0b0b0; padding: 4px 6px; text-align: left; vertical-align: top; }
+th { background: #f3f3f1; }
+td.num, th.num { text-align: center; }
+td.blank { height: 22px; }
+.ans { border: 1px solid #b0b0b0; margin: 4px 0 10px 0; }
+.ans.s { height: 14mm; }
+.ans.m { height: 26mm; }
+.ans.l { height: 42mm; }
+.ans.xl { height: 70mm; }
+.fill { display: inline-block; min-width: 30mm; border-bottom: 1px solid #1a1a1a; }
+.eq { font-family: "Times New Roman", Times, serif; font-size: 12pt; text-align: center; margin: 6px 0; }
+.page-break { break-before: page; }
+.avoid { break-inside: avoid; }
+a { color: #4d7e5e; }

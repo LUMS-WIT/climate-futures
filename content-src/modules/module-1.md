@@ -38,6 +38,8 @@ Permalink: [/content/module-1/#lec2](https://lums-wit.github.io/climate-futures/
 
 [Download slides (PDF)](/slides/lecture-02-radiations-and-greenhouse-gases.pdf)
 
+In-class activity: [Energy Balance with N Atmospheric Layers (PDF)](/activities/lecture-02-activity-energy-balance.pdf)
+
 (lec3)=
 ### Lecture 3: Observations
 
@@ -48,6 +50,8 @@ Permalink: [/content/module-1/#lec3](https://lums-wit.github.io/climate-futures/
 <iframe src="/climate-futures/content/slides/lecture-03-observations.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
 
 [Download slides (PDF)](/slides/lecture-03-observations.pdf)
+
+In-class activity: [Evaluating Climate Skeptic Arguments (PDF)](/activities/lecture-03-activity-climate-skeptic-arguments.pdf)
 
 (lec4)=
 ### Lecture 4: Radiative Forcing and Feedbacks
