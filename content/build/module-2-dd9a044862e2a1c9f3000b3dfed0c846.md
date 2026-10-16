@@ -38,6 +38,8 @@ Permalink: [/content/module-2/#lec7](https://lums-wit.github.io/climate-futures/
 
 [Download slides (PDF)](/slides/lecture-07-representative-concentration-pathways.pdf)
 
+In-class activity: [Exploring the RCP Database (PDF)](/activities/lecture-07-activity-rcp-database.pdf)
+
 (lec8)=
 ### Lecture 8: Shared Socioeconomic Pathways (SSPs)
 
@@ -60,6 +62,8 @@ Permalink: [/content/module-2/#lec9](https://lums-wit.github.io/climate-futures/
 
 [Download slides (PDF)](/slides/lecture-09-introduction-to-integrated-assessment-models.pdf)
 
+In-class activity: [The Social Cost of Carbon (PDF)](/activities/lecture-09-activity-cost-of-carbon.pdf)
+
 (lec10)=
 ### Lecture 10: Energy System Transitions
 
@@ -71,4 +75,28 @@ Permalink: [/content/module-2/#lec10](https://lums-wit.github.io/climate-futures
 
 [Download slides (PDF)](/slides/lecture-10-energy-system-transitions.pdf)
 
+In-class activity: [Electrification in the AR6 Scenario Database (PDF)](/activities/lecture-10-activity-ar6-scenario-database.pdf)
+
+(lec11)=
+### Lecture 11: Introduction to MESSAGEix
+
+The role of least-cost optimisation in process-based integrated assessment models, introduced through linear programming: decision variables, an objective function, and constraints, worked through a small power system with coal and wind. The lecture then presents MESSAGEix as a systems optimisation model that minimises the total discounted cost of an energy system, distinguishes capacity from activity, and describes how the model represents systems in transition. It closes with the open-source MESSAGEix and ixmp framework, its documentation and installation, and the scenario workflow used in the coding exercises for this course.
+
+Permalink: [/content/module-2/#lec11](https://lums-wit.github.io/climate-futures/content/module-2/#lec11)
+
+<iframe src="/climate-futures/content/slides/lecture-11-introduction-to-messageix.pdf" width="100%" height="600px" style="border: 1px solid #e0e0e0;"></iframe>
+
+[Download slides (PDF)](/slides/lecture-11-introduction-to-messageix.pdf)
+
+In-class activity: [Adding Gas and an Emission Cap: Solving a Power System by Hand (PDF)](/activities/lecture-11-activity-adding-gas-emission-cap.pdf)
+
 More lecture slides for this module will be posted here as it is taught.
+
+## Assignments
+
+(asg1)=
+### Assignment 1: Regional Projections and the Nepal Flood
+
+Due October 27, 2026. Students read CMIP6 projections for an AR6 reference region in the IPCC Interactive Atlas and post their findings in [Discussion #6](https://github.com/LUMS-WIT/climate-futures/discussions/6), then contribute new evidence on the 2026 Bhote Koshi flood in [Discussion #5](https://github.com/LUMS-WIT/climate-futures/discussions/5).
+
+[Assignment 1 brief (PDF)](/activities/assignment-01.pdf)
